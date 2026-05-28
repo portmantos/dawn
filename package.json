@@ -1,0 +1,13 @@
+{
+  "name": "shopify-dawn-theme",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A Shopify theme project based on Shopify's free Dawn theme.",
+  "scripts": {
+    "dev": "shopify theme dev",
+    "check": "shopify theme check",
+    "pull": "shopify theme pull",
+    "push": "shopify theme push",
+    "package": "shopify theme package"
+  }
+}

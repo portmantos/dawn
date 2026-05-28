@@ -1,7 +1,7 @@
-# Dawn
+# Shopify Dawn Theme Starter
 
-[![Build status](https://github.com/shopify/dawn/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Shopify/dawn/actions/workflows/ci.yml?query=branch%3Amain)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?color=informational)](/.github/CONTRIBUTING.md)
+This is a Git-ready Shopify theme project based on Shopify's free Dawn theme.
+Use [PROJECT_SETUP.md](PROJECT_SETUP.md) for local development, GitHub, and Shopify setup steps.
 
 [Getting started](#getting-started) |
 [Staying up to date with Dawn changes](#staying-up-to-date-with-dawn-changes) |
