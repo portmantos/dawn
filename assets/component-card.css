@@ -296,6 +296,16 @@
   width: 100%;
 }
 
+.product-card-wrapper .card__media,
+.product-card-wrapper .card__media .media {
+  background: #ffffff;
+}
+
+.product-card-wrapper .card__media .media img {
+  object-fit: contain;
+  padding: 1.2rem;
+}
+
 .card__inner:not(.ratio) > .card__content {
   height: 100%;
 }
