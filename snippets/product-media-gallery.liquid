@@ -1,10 +1,4 @@
 {%- assign selected_variant = product.selected_or_first_available_variant -%}
-{%- assign variants_with_gallery = 0 -%}
-{%- for variant in product.variants -%}
-  {%- if variant.metafields.custom.variant_gallery.value != blank -%}
-    {%- assign variants_with_gallery = variants_with_gallery | plus: 1 -%}
-  {%- endif -%}
-{%- endfor -%}
 
 <media-gallery
   id="MediaGallery-{{ section.id }}"
@@ -17,61 +11,50 @@
     {{ 'accessibility.skip_to_product_info' | t }}
   </a>
   <div class="non-stop-gallery__stage">
-    {%- if variants_with_gallery > 0 -%}
-      {%- for variant in product.variants -%}
-        {%- assign variant_gallery = variant.metafields.custom.variant_gallery.value -%}
+    {%- for variant in product.variants -%}
+      {%- assign variant_gallery = variant.metafields.custom.variant_gallery.value -%}
+      {%- assign fallback_image = variant.featured_media.preview_image | default: product.media.first.preview_image -%}
+      <div
+        class="non-stop-gallery__variant{% unless variant.id == selected_variant.id %} hidden{% endunless %}"
+        data-variant-gallery="{{ variant.id }}"
+      >
         {%- if variant_gallery != blank -%}
-          <div
-            class="non-stop-gallery__variant{% unless variant.id == selected_variant.id %} hidden{% endunless %}"
-            data-variant-gallery="{{ variant.id }}"
-          >
-            {%- assign primary_image = variant_gallery | first -%}
-            {%- assign primary_alt = primary_image.alt | default: product.title -%}
-            <button class="non-stop-gallery__main" type="button" aria-label="{{ 'products.product.media.open_media' | t }}">
-              {{
-                primary_image
-                | image_url: width: 1800
-                | image_tag: class: 'non-stop-gallery__main-image', loading: 'eager', alt: primary_alt
-              }}
-            </button>
-            <div class="non-stop-gallery__thumbs" role="list">
-              {%- for image in variant_gallery -%}
-                {%- assign image_alt = image.alt | default: product.title -%}
-                <button
-                  type="button"
-                  class="non-stop-gallery__thumb{% if forloop.first %} is-active{% endif %}"
-                  data-gallery-image="{{ image | image_url: width: 1800 }}"
-                  data-gallery-alt="{{ image_alt | escape }}"
-                  aria-label="{{ 'sections.slideshow.load_slide' | t }} {{ forloop.index }}"
-                >
-                  {{ image | image_url: width: 180 | image_tag: loading: 'lazy', alt: image_alt }}
-                </button>
-              {%- endfor -%}
-            </div>
+          {%- assign primary_image = variant_gallery | first -%}
+          {%- assign primary_alt = primary_image.alt | default: product.title -%}
+          <button class="non-stop-gallery__main" type="button" aria-label="{{ 'products.product.media.open_media' | t }}">
+            {{ primary_image | image_url: width: 1800 | image_tag: class: 'non-stop-gallery__main-image', loading: 'eager', alt: primary_alt }}
+          </button>
+          <div class="non-stop-gallery__thumbs" role="list">
+            {%- for image in variant_gallery -%}
+              {%- assign image_alt = image.alt | default: product.title -%}
+              <button
+                type="button"
+                class="non-stop-gallery__thumb{% if forloop.first %} is-active{% endif %}"
+                data-gallery-image="{{ image | image_url: width: 1800 }}"
+                data-gallery-alt="{{ image_alt | escape }}"
+                aria-label="{{ 'sections.slideshow.load_slide' | t }} {{ forloop.index }}"
+              >
+                {{ image | image_url: width: 180 | image_tag: loading: 'lazy', alt: image_alt }}
+              </button>
+            {%- endfor -%}
           </div>
-        {%- endif -%}
-      {%- endfor -%}
-    {%- else -%}
-      <div class="non-stop-gallery__variant" data-variant-gallery="{{ selected_variant.id }}">
-        {%- assign primary_media = product.media | first -%}
-        <button class="non-stop-gallery__main" type="button" aria-label="{{ 'products.product.media.open_media' | t }}">
-          {{ primary_media.preview_image | image_url: width: 1800 | image_tag: class: 'non-stop-gallery__main-image', loading: 'eager', alt: product.title }}
-        </button>
-        <div class="non-stop-gallery__thumbs" role="list">
-          {%- for media in product.media -%}
-            {%- assign media_alt = media.alt | default: product.title -%}
+        {%- elsif fallback_image != blank -%}
+          <button class="non-stop-gallery__main" type="button" aria-label="{{ 'products.product.media.open_media' | t }}">
+            {{ fallback_image | image_url: width: 1800 | image_tag: class: 'non-stop-gallery__main-image', loading: 'eager', alt: product.title }}
+          </button>
+          <div class="non-stop-gallery__thumbs" role="list">
             <button
               type="button"
-              class="non-stop-gallery__thumb{% if forloop.first %} is-active{% endif %}"
-              data-gallery-image="{{ media.preview_image | image_url: width: 1800 }}"
-              data-gallery-alt="{{ media_alt | escape }}"
-              aria-label="{{ 'sections.slideshow.load_slide' | t }} {{ forloop.index }}"
+              class="non-stop-gallery__thumb is-active"
+              data-gallery-image="{{ fallback_image | image_url: width: 1800 }}"
+              data-gallery-alt="{{ product.title | escape }}"
+              aria-label="{{ 'sections.slideshow.load_slide' | t }} 1"
             >
-              {{ media.preview_image | image_url: width: 180 | image_tag: loading: 'lazy', alt: media_alt }}
+              {{ fallback_image | image_url: width: 180 | image_tag: loading: 'lazy', alt: product.title }}
             </button>
-          {%- endfor -%}
-        </div>
+          </div>
+        {%- endif -%}
       </div>
-    {%- endif -%}
+    {%- endfor -%}
   </div>
 </media-gallery>
