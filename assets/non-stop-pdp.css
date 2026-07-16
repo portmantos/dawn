@@ -34,8 +34,8 @@
 
 .non-stop-pdp .product__title h1,
 .non-stop-pdp .product__title .h1 {
-  font-size: clamp(3.2rem, 4vw, 5.2rem);
-  line-height: .98;
+  font-size: clamp(2.8rem, 3vw, 4rem);
+  line-height: 1.02;
   letter-spacing: -.045em;
   margin: 0;
 }
@@ -52,8 +52,90 @@
   font-size: 1.8rem;
 }
 
+.non-stop-pdp .price__badge-sale {
+  display: none;
+}
+
+.non-stop-pdp .non-stop-discount-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.4rem;
+  padding: 0 .8rem;
+  margin-left: .8rem;
+  border-radius: 999px;
+  background: rgb(var(--color-button));
+  color: rgb(var(--color-button-text));
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+}
+
 .non-stop-pdp .product__info-container .product-form__input {
   max-width: none;
+}
+
+.non-stop-product-facts {
+  padding: 1.8rem 0;
+  border-top: .1rem solid rgba(var(--color-foreground), .22);
+  border-bottom: .1rem solid rgba(var(--color-foreground), .22);
+}
+
+.non-stop-product-facts__eyebrow {
+  margin: 0 0 1rem;
+  color: rgba(var(--color-foreground), .66);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.non-stop-product-facts__features ul {
+  display: grid;
+  gap: .7rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 1.35rem;
+  line-height: 1.45;
+}
+
+.non-stop-product-facts__features li::before {
+  content: '+';
+  display: inline-block;
+  margin-right: .8rem;
+  color: rgba(var(--color-foreground), .58);
+}
+
+.non-stop-product-facts__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+  margin: 1.6rem 0 0;
+}
+
+.non-stop-product-facts__grid div {
+  min-width: 0;
+}
+
+.non-stop-product-facts__grid dt {
+  margin-bottom: .3rem;
+  color: rgba(var(--color-foreground), .58);
+  font-size: 1.1rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.non-stop-product-facts__grid dd {
+  margin: 0;
+  font-size: 1.3rem;
+  line-height: 1.35;
+}
+
+.non-stop-pdp__description .accordion__content {
+  max-height: 28rem;
+  overflow: auto;
+  font-size: 1.35rem;
+  line-height: 1.55;
 }
 
 .non-stop-pdp .product__info-container .product-form__submit {
@@ -154,6 +236,6 @@
 
   .non-stop-pdp .product__title h1,
   .non-stop-pdp .product__title .h1 {
-    font-size: 3.4rem;
+    font-size: 3rem;
   }
 }

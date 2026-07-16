@@ -1,0 +1,36 @@
+{%- liquid
+  assign feature_bullets = product.metafields.custom.feature_bullets.value
+  assign material = product.metafields.custom.material.value | default: product.metafields.custom.materials.value
+  assign dimensions = product.metafields.custom.dimensions.value
+  assign capacity = product.metafields.custom.capacity.value
+  assign weight = product.metafields.custom.weight.value
+  assign warranty = product.metafields.custom.warranty.value
+  assign care = product.metafields.custom.care_instructions.value | default: product.metafields.custom.care.value
+  assign has_facts = false
+  if feature_bullets != blank or material != blank or dimensions != blank or capacity != blank or weight != blank or warranty != blank or care != blank
+    assign has_facts = true
+  endif
+-%}
+
+{%- if has_facts -%}
+  <div class="non-stop-product-facts">
+    {%- if feature_bullets != blank -%}
+      <div class="non-stop-product-facts__features">
+        <p class="non-stop-product-facts__eyebrow">{{ 'products.product.highlights' | t }}</p>
+        <ul role="list">
+          {%- for bullet in feature_bullets limit: 5 -%}
+            <li>{{ bullet }}</li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+    <dl class="non-stop-product-facts__grid">
+      {%- if material != blank -%}<div><dt>{{ 'products.product.material' | t }}</dt><dd>{{ material }}</dd></div>{%- endif -%}
+      {%- if dimensions != blank -%}<div><dt>{{ 'products.product.dimensions' | t }}</dt><dd>{{ dimensions }}</dd></div>{%- endif -%}
+      {%- if capacity != blank -%}<div><dt>{{ 'products.product.capacity' | t }}</dt><dd>{{ capacity }}</dd></div>{%- endif -%}
+      {%- if weight != blank -%}<div><dt>{{ 'products.product.weight' | t }}</dt><dd>{{ weight }}</dd></div>{%- endif -%}
+      {%- if warranty != blank -%}<div><dt>{{ 'products.product.warranty' | t }}</dt><dd>{{ warranty }}</dd></div>{%- endif -%}
+      {%- if care != blank -%}<div><dt>{{ 'products.product.care' | t }}</dt><dd>{{ care }}</dd></div>{%- endif -%}
+    </dl>
+  </div>
+{%- endif -%}
