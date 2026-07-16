@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -24,7 +33,8 @@
           }
         },
         "price": {
-          "type": "price"
+          "type": "price",
+          "settings": {}
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -33,7 +43,8 @@
           }
         },
         "quantity_selector": {
-          "type": "quantity_selector"
+          "type": "quantity_selector",
+          "settings": {}
         },
         "buy_buttons": {
           "type": "buy_buttons",
@@ -43,7 +54,8 @@
           }
         },
         "description": {
-          "type": "description"
+          "type": "description",
+          "settings": {}
         },
         "shipping": {
           "type": "collapsible_tab",
@@ -73,12 +85,24 @@
           }
         }
       },
-      "block_order": ["vendor", "title", "caption", "price", "variant_picker", "quantity_selector", "buy_buttons", "description", "shipping", "dimensions", "care"],
+      "block_order": [
+        "vendor",
+        "title",
+        "caption",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "description",
+        "shipping",
+        "dimensions",
+        "care"
+      ],
       "settings": {
         "enable_sticky_info": true,
-        "gallery_layout": "thumbnail_slider",
         "media_size": "large",
         "constrain_to_viewport": true,
+        "gallery_layout": "thumbnail_slider",
         "mobile_thumbnails": "show",
         "hide_variants": true,
         "enable_video_looping": false,
@@ -111,7 +135,11 @@
           }
         }
       },
-      "block_order": ["organization", "comfort", "repeat"],
+      "block_order": [
+        "organization",
+        "comfort",
+        "repeat"
+      ],
       "settings": {
         "image": "",
         "eyebrow": "Why it travels well",
@@ -146,7 +174,11 @@
           }
         }
       },
-      "block_order": ["shipping", "returns", "support"],
+      "block_order": [
+        "shipping",
+        "returns",
+        "support"
+      ],
       "settings": {
         "heading": "The non-stop promise",
         "color_scheme": "scheme-4"
@@ -158,16 +190,21 @@
         "heading": "Complete the setup",
         "heading_size": "h2",
         "columns_desktop": 4,
+        "columns_mobile": "2",
         "color_scheme": "scheme-1",
         "image_ratio": "portrait",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
-        "columns_mobile": "2",
         "padding_top": 72,
         "padding_bottom": 56
       }
     }
   },
-  "order": ["main", "story", "benefits", "related_products"]
+  "order": [
+    "main",
+    "story",
+    "benefits",
+    "related_products"
+  ]
 }
