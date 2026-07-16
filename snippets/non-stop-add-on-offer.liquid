@@ -1,0 +1,78 @@
+{% comment %}
+  Renders a product-level optional add-on backed by custom.add_on_offer.
+
+  Accepts:
+  - product: {Object} Product object.
+  - section_id: {String} Section id used to create unique input ids.
+{% endcomment %}
+
+{%- liquid
+  assign offer = product.metafields.custom.add_on_offer.value
+  assign add_on_product = offer.add_on_product.value
+  assign add_on_variant = add_on_product.selected_or_first_available_variant
+  assign add_on_image = add_on_variant.featured_image | default: add_on_product.featured_image
+  assign offer_is_active = offer.active.value
+  assign offer_price = offer.final_price.value | times: 100 | round
+  assign offer_savings = add_on_variant.price | minus: offer_price
+-%}
+
+{%- if offer != blank and offer_is_active and add_on_product != blank and add_on_variant != blank -%}
+  <fieldset class="non-stop-add-on" data-non-stop-add-on-offer>
+    <legend class="visually-hidden">Optional add-on</legend>
+    <label
+      class="non-stop-add-on__option{% unless add_on_variant.available %} is-unavailable{% endunless %}"
+      for="NonStopAddOn-{{ section_id }}"
+    >
+      <input
+        id="NonStopAddOn-{{ section_id }}"
+        class="non-stop-add-on__input"
+        type="checkbox"
+        value="{{ add_on_variant.id }}"
+        data-non-stop-add-on
+        data-variant-id="{{ add_on_variant.id }}"
+        data-offer-handle="{{ offer.system.handle | escape }}"
+        {% unless add_on_variant.available %}
+          disabled
+        {% endunless %}
+      >
+      <span class="non-stop-add-on__check" aria-hidden="true">
+        {{- 'icon-checkmark.svg' | inline_asset_content -}}
+      </span>
+
+      {%- if add_on_image != blank -%}
+        <span class="non-stop-add-on__image">
+          {{-
+            add_on_image
+            | image_url: width: 180
+            | image_tag:
+              loading: 'lazy',
+              widths: '90, 135, 180',
+              sizes: '72px',
+              alt: add_on_product.title
+          -}}
+        </span>
+      {%- endif -%}
+
+      <span class="non-stop-add-on__copy">
+        <span class="non-stop-add-on__eyebrow">{{ offer.badge.value | default: 'Add-on offer' | escape }}</span>
+        <strong>{{ offer.title.value | default: add_on_product.title | escape }}</strong>
+        {%- if offer.description.value != blank -%}
+          <small>{{ offer.description.value | escape }}</small>
+        {%- endif -%}
+        {%- unless add_on_variant.available -%}
+          <small class="non-stop-add-on__unavailable">Currently unavailable</small>
+        {%- endunless -%}
+      </span>
+
+      <span class="non-stop-add-on__price">
+        {%- if offer_savings > 0 -%}
+          <s>{{ add_on_variant.price | money }}</s>
+        {%- endif -%}
+        <strong>{{ offer_price | money }}</strong>
+      </span>
+    </label>
+    <p class="non-stop-add-on__checkout-note" data-non-stop-add-on-checkout-note hidden>
+      Use Add to cart to include this offer. Express checkout is temporarily hidden.
+    </p>
+  </fieldset>
+{%- endif -%}

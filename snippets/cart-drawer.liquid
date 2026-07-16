@@ -118,12 +118,25 @@
 
                   <tbody role="rowgroup">
                     {%- for item in cart.items -%}
+                      {%- liquid
+                        assign non_stop_bundle_id = item.properties['_non_stop_bundle_id']
+                        assign non_stop_is_add_on = item.properties['_non_stop_add_on']
+                      -%}
                       <tr
                         id="CartDrawer-Item-{{ item.index | plus: 1 }}"
-                        class="cart-item{% if item.parent_relationship.parent != null %} cart-item__nested-line{% endif %}"
+                        class="cart-item{% if item.parent_relationship.parent != null or non_stop_is_add_on == 'true' %} cart-item__nested-line{% endif %}{% if non_stop_is_add_on == 'true' %} cart-item--non-stop-addon{% endif %}"
                         role="row"
+                        data-line-key="{{ item.key | escape }}"
+                        {% if non_stop_bundle_id != blank %}
+                          data-non-stop-bundle-id="{{ non_stop_bundle_id | escape }}"
+                        {% endif %}
+                        {% if non_stop_is_add_on == 'true' %}
+                          data-non-stop-add-on="true"
+                        {% endif %}
                         {% if item.parent_relationship.parent != null %}
                           aria-label="{{- 'products.product.nested_label' | t: title: item.product.title, parent_title: item.parent_relationship.parent.title | escape -}}"
+                        {% elsif non_stop_is_add_on == 'true' %}
+                          aria-label="Add-on: {{ item.product.title | escape }}"
                         {% endif %}
                       >
                         <td
@@ -146,6 +159,9 @@
                         </td>
 
                         <td class="cart-item__details" role="cell" headers="CartDrawer-ColumnProduct">
+                          {%- if non_stop_is_add_on == 'true' -%}
+                            <p class="non-stop-cart-addon__label">Selected add-on</p>
+                          {%- endif -%}
                           {%- if settings.show_vendor -%}
                             <p class="caption-with-letter-spacing light">{{ item.product.vendor }}</p>
                           {%- endif -%}

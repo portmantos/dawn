@@ -11,6 +11,14 @@ if (!customElements.get('product-form')) {
         this.cart = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
         this.submitButton = this.querySelector('[type="submit"]');
         this.submitButtonText = this.submitButton.querySelector('span');
+        this.addOnCheckbox = this.querySelector('[data-non-stop-add-on]');
+        this.dynamicCheckout = this.querySelector('.shopify-payment-button');
+        this.addOnCheckoutNote = this.querySelector('[data-non-stop-add-on-checkout-note]');
+
+        if (this.addOnCheckbox) {
+          this.addOnCheckbox.addEventListener('change', this.onAddOnChange.bind(this));
+          this.onAddOnChange();
+        }
 
         if (document.querySelector('cart-drawer')) this.submitButton.setAttribute('aria-haspopup', 'dialog');
 
@@ -40,7 +48,14 @@ if (!customElements.get('product-form')) {
           formData.append('sections_url', window.location.pathname);
           this.cart.setActiveElement(document.activeElement);
         }
-        config.body = formData;
+
+        const addOnRequest = this.buildAddOnRequest(formData);
+        if (addOnRequest) {
+          config.headers['Content-Type'] = 'application/json';
+          config.body = JSON.stringify(addOnRequest);
+        } else {
+          config.body = formData;
+        }
 
         fetch(`${routes.cart_add_url}`, config)
           .then((response) => response.json())
@@ -62,6 +77,11 @@ if (!customElements.get('product-form')) {
               this.error = true;
               return;
             } else if (!this.cart) {
+              window.location = window.routes.cart_url;
+              return;
+            }
+
+            if (addOnRequest && this.cart.tagName === 'CART-NOTIFICATION') {
               window.location = window.routes.cart_url;
               return;
             }
@@ -122,6 +142,71 @@ if (!customElements.get('product-form')) {
         if (errorMessage) {
           this.errorMessage.textContent = errorMessage;
         }
+      }
+
+      onAddOnChange() {
+        const addOnSelected = this.addOnCheckbox?.checked === true;
+
+        if (this.dynamicCheckout) this.dynamicCheckout.hidden = addOnSelected;
+        if (this.addOnCheckoutNote) this.addOnCheckoutNote.hidden = !addOnSelected;
+      }
+
+      buildAddOnRequest(formData) {
+        if (!this.addOnCheckbox?.checked || this.addOnCheckbox.disabled) return null;
+
+        const productVariantId = formData.get('id');
+        const addOnVariantId = this.addOnCheckbox.dataset.variantId;
+        if (!productVariantId || !addOnVariantId) return null;
+
+        const quantity = Math.max(parseInt(formData.get('quantity') || '1', 10), 1);
+        const bundleId = `non-stop-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+        const parentProperties = this.getLineItemProperties(formData);
+
+        parentProperties._non_stop_bundle_id = bundleId;
+        parentProperties._non_stop_add_on_variant = addOnVariantId;
+
+        const productItem = {
+          id: Number(productVariantId),
+          quantity,
+          properties: parentProperties,
+        };
+
+        const sellingPlan = formData.get('selling_plan');
+        if (sellingPlan) productItem.selling_plan = Number(sellingPlan);
+
+        const request = {
+          items: [
+            productItem,
+            {
+              id: Number(addOnVariantId),
+              quantity,
+              properties: {
+                _non_stop_add_on: 'true',
+                _non_stop_bundle_id: bundleId,
+                _non_stop_parent_variant: String(productVariantId),
+                _non_stop_offer: this.addOnCheckbox.dataset.offerHandle || '',
+              },
+            },
+          ],
+        };
+
+        if (this.cart) {
+          request.sections = this.cart.getSectionsToRender().map((section) => section.id);
+          request.sections_url = window.location.pathname;
+        }
+
+        return request;
+      }
+
+      getLineItemProperties(formData) {
+        const properties = {};
+
+        for (const [key, value] of formData.entries()) {
+          const propertyMatch = key.match(/^properties\[(.+)]$/);
+          if (propertyMatch && value !== '') properties[propertyMatch[1]] = value;
+        }
+
+        return properties;
       }
 
       toggleSubmitButton(disable = true, text) {

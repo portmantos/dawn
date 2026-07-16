@@ -219,6 +219,31 @@ cart-remove-button .icon-remove {
   margin: 0;
 }
 
+.non-stop-cart-addon__label {
+  margin: 0 0 .35rem;
+  color: rgba(var(--color-foreground), .62);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.cart-item--non-stop-addon .cart-item__media {
+  border-left: .2rem solid rgba(var(--color-foreground), .22);
+}
+
+.cart-item--non-stop-addon .quantity-popover-container {
+  display: none;
+}
+
+.cart-item--non-stop-addon .cart-item__quantity-wrapper::before {
+  content: 'Linked quantity';
+  color: rgba(var(--color-foreground), .58);
+  font-size: 1.05rem;
+  white-space: nowrap;
+}
+
 .cart-items thead th {
   text-transform: uppercase;
 }

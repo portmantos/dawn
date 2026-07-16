@@ -147,17 +147,38 @@ class CartItems extends HTMLElement {
   updateQuantity(line, quantity, event, name, variantId) {
     const eventTarget = event.currentTarget instanceof CartRemoveButton ? 'clear' : 'change';
     const cartPerformanceUpdateMarker = CartPerformance.createStartingMarker(`${eventTarget}:user-action`);
+    const sourceLineItem =
+      this.querySelector(`#CartItem-${line}`) || this.querySelector(`#CartDrawer-Item-${line}`);
+    const bundleId = sourceLineItem?.dataset.nonStopBundleId;
+    const linkedAddOnLine =
+      bundleId && sourceLineItem.dataset.nonStopAddOn !== 'true'
+        ? [...this.querySelectorAll('.cart-item[data-non-stop-add-on="true"]')].find(
+            (item) => item.dataset.nonStopBundleId === bundleId
+          )
+        : null;
 
     this.enableLoading(line);
 
-    const body = JSON.stringify({
-      line,
-      quantity,
+    const requestData = {
       sections: this.getSectionsToRender().map((section) => section.section),
       sections_url: window.location.pathname,
-    });
+    };
+    let updateUrl = routes.cart_change_url;
 
-    fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
+    if (linkedAddOnLine && sourceLineItem.dataset.lineKey && linkedAddOnLine.dataset.lineKey) {
+      requestData.updates = {
+        [sourceLineItem.dataset.lineKey]: quantity,
+        [linkedAddOnLine.dataset.lineKey]: quantity,
+      };
+      updateUrl = routes.cart_update_url;
+    } else {
+      requestData.line = line;
+      requestData.quantity = quantity;
+    }
+
+    const body = JSON.stringify(requestData);
+
+    fetch(`${updateUrl}`, { ...fetchConfig(), ...{ body } })
       .then((response) => {
         return response.text();
       })

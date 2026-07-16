@@ -79,11 +79,24 @@
 
               <tbody>
                 {%- for item in cart.items -%}
+                  {%- liquid
+                    assign non_stop_bundle_id = item.properties['_non_stop_bundle_id']
+                    assign non_stop_is_add_on = item.properties['_non_stop_add_on']
+                  -%}
                   <tr
-                    class="cart-item {% if item.parent_relationship.parent != null %}cart-item__nested-line{% endif %}"
+                    class="cart-item{% if item.parent_relationship.parent != null or non_stop_is_add_on == 'true' %} cart-item__nested-line{% endif %}{% if non_stop_is_add_on == 'true' %} cart-item--non-stop-addon{% endif %}"
                     id="CartItem-{{ item.index | plus: 1 }}"
+                    data-line-key="{{ item.key | escape }}"
+                    {% if non_stop_bundle_id != blank %}
+                      data-non-stop-bundle-id="{{ non_stop_bundle_id | escape }}"
+                    {% endif %}
+                    {% if non_stop_is_add_on == 'true' %}
+                      data-non-stop-add-on="true"
+                    {% endif %}
                     {% if item.parent_relationship.parent != null %}
                       aria-label="{{- 'products.product.nested_label' | t: title: item.product.title, parent_title: item.parent_relationship.parent.title | escape -}}"
+                    {% elsif non_stop_is_add_on == 'true' %}
+                      aria-label="Add-on: {{ item.product.title | escape }}"
                     {% endif %}
                   >
                     <td class="cart-item__media">
@@ -104,6 +117,9 @@
                     </td>
 
                     <td class="cart-item__details">
+                      {%- if non_stop_is_add_on == 'true' -%}
+                        <p class="non-stop-cart-addon__label">Selected add-on</p>
+                      {%- endif -%}
                       {%- if settings.show_vendor -%}
                         <p class="caption-with-letter-spacing">{{ item.product.vendor }}</p>
                       {%- endif -%}
