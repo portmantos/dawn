@@ -18,10 +18,17 @@ if (!customElements.get('product-card-swatches')) {
         const imageSource = button.dataset.imageSrc;
 
         if (image && imageSource) {
-          image.src = imageSource;
-          image.srcset = '';
-          image.alt = button.dataset.imageAlt || image.alt;
-          card.classList.add('is-variant-selected');
+          card.dataset.pendingVariantImage = imageSource;
+          const nextImage = new Image();
+          nextImage.onload = () => {
+            if (card.dataset.pendingVariantImage !== imageSource) return;
+            image.removeAttribute('srcset');
+            image.removeAttribute('sizes');
+            image.src = imageSource;
+            image.alt = button.dataset.imageAlt || image.alt;
+            card.classList.add('is-variant-selected');
+          };
+          nextImage.src = imageSource;
         }
 
         card?.querySelectorAll('[data-card-product-link]').forEach((link) => {

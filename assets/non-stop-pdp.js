@@ -18,8 +18,28 @@ class NonStopProductGallery {
     this.productInfo?.addEventListener('change', (event) => {
       const input = event.target.closest('.non-stop-variant-input:checked');
       if (!input || !input.dataset.galleryVariantId) return;
+      this.syncProductForm(input);
       this.showVariant(input.dataset.galleryVariantId);
     });
+  }
+
+  syncProductForm(input) {
+    const productForm = this.productInfo?.querySelector('product-form');
+    const variantId = input.dataset.galleryVariantId;
+    if (!productForm || !variantId) return;
+
+    const variantInput = productForm.variantIdInput || productForm.querySelector('input[name="id"]');
+    if (variantInput) {
+      variantInput.value = variantId;
+      variantInput.disabled = false;
+      variantInput.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+
+    const isAvailable = input.dataset.variantAvailable === 'true';
+    if (typeof productForm.toggleSubmitButton === 'function') {
+      productForm.toggleSubmitButton(!isAvailable, isAvailable ? window.variantStrings.addToCart : window.variantStrings.soldOut);
+    }
+    if (isAvailable) productForm.submitButton?.removeAttribute('aria-disabled');
   }
 
   bindGalleryControls() {
