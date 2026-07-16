@@ -18,6 +18,15 @@
       {%- liquid
         assign swatch_count = option.values | map: 'swatch' | compact | size
         assign picker_type = block.settings.picker_type
+        assign option_name = option.name | downcase
+        assign is_color_option = false
+        assign is_size_option = false
+
+        if option_name contains 'color' or option_name contains 'colour'
+          assign is_color_option = true
+        elsif option_name contains 'size'
+          assign is_size_option = true
+        endif
 
         if swatch_count > 0 and block.settings.swatch_shape != 'none'
           if block.settings.picker_type == 'dropdown'
@@ -27,7 +36,38 @@
           endif
         endif
       -%}
-      {%- if picker_type == 'swatch' -%}
+      {%- if is_color_option -%}
+        <fieldset class="js product-form__input non-stop-option-group non-stop-option-group--color">
+          <legend class="form__label">
+            <span>{{ option.name }}</span>
+            <span class="non-stop-option-group__selected" data-selected-value>{{- option.selected_value -}}</span>
+          </legend>
+          <div class="non-stop-color-pivot">
+            {% render 'non-stop-variant-options',
+              product: product,
+              option: option,
+              block: block,
+              picker_type: 'color',
+              product_form_id: product_form_id,
+              section_id: section.id
+            %}
+          </div>
+        </fieldset>
+      {%- elsif is_size_option -%}
+        <fieldset class="js product-form__input non-stop-option-group non-stop-option-group--size">
+          <legend class="form__label">{{ option.name }}</legend>
+          <div class="non-stop-size-pivot">
+            {% render 'non-stop-variant-options',
+              product: product,
+              option: option,
+              block: block,
+              picker_type: 'size',
+              product_form_id: product_form_id,
+              section_id: section.id
+            %}
+          </div>
+        </fieldset>
+      {%- elsif picker_type == 'swatch' -%}
         <fieldset class="js product-form__input product-form__input--swatch">
           <legend class="form__label">
             {{ option.name }}:

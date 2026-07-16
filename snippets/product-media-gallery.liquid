@@ -12,17 +12,51 @@
 {% endcomment %}
 
 {%- liquid
-  if section.settings.hide_variants and variant_images.size == product.media.size
-    assign single_media_visible = true
+  assign media_count = product.media.size
+  assign color_option_index = ''
+  assign selected_color_value = ''
+  for option in product.options_with_values
+    assign option_name = option.name | downcase
+    if option_name contains 'color' or option_name contains 'colour'
+      assign color_option_index = forloop.index0
+      assign selected_color_value = option.selected_value
+    endif
+  endfor
+
+  if section.settings.hide_variants and media_count > 1 and variant_images.size > 0
+    if color_option_index != blank
+      assign visible_variant_media_count = 0
+      for image in product.images
+        if image.attached_to_variant?
+          assign image_matches_color = false
+          for image_variant in image.variants
+            if image_variant.title contains selected_color_value
+              assign image_matches_color = true
+            endif
+          endfor
+          if image_matches_color
+            assign visible_variant_media_count = visible_variant_media_count | plus: 1
+          endif
+        endif
+      endfor
+      if visible_variant_media_count == 0
+        assign visible_variant_media_count = 1
+      endif
+      assign hidden_variant_media_count = variant_images.size | minus: visible_variant_media_count
+      assign media_count = media_count | minus: hidden_variant_media_count
+    else
+      assign media_count = media_count | minus: variant_images.size | plus: 1
+    endif
   endif
 
   if limit == 1
     assign single_media_visible = true
   endif
 
-  assign media_count = product.media.size
-  if section.settings.hide_variants and media_count > 1 and variant_images.size > 0
-    assign media_count = media_count | minus: variant_images.size | plus: 1
+  if section.settings.hide_variants and variant_images.size == product.media.size
+    if media_count <= 1
+      assign single_media_visible = true
+    endif
   endif
 
   if media_count == 1 or single_media_visible
@@ -86,11 +120,25 @@
         </li>
       {%- endif -%}
       {%- for media in product.media -%}
-        {% if media_position >= limit
-          or media_position >= 1
-          and section.settings.hide_variants
-          and variant_images contains media.src
-        %}
+        {%- liquid
+          assign hide_media = false
+          if media_position >= limit
+            assign hide_media = true
+          elsif media_position >= 1 and section.settings.hide_variants and variant_images contains media.src
+            assign media_matches_color = false
+            if color_option_index != blank and media.preview_image
+              for media_variant in media.preview_image.variants
+                if media_variant.title contains selected_color_value
+                  assign media_matches_color = true
+                endif
+              endfor
+            endif
+            unless media_matches_color
+              assign hide_media = true
+            endunless
+          endif
+        -%}
+        {% if hide_media %}
           {% continue %}
         {% endif %}
 

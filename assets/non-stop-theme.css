@@ -613,6 +613,173 @@ body.non-stop-theme {
   font-size: 1.8rem;
 }
 
+.non-stop-theme .non-stop-option-group {
+  margin: 2.8rem 0 0;
+  padding: 2rem 0 0;
+  border-top: 1px solid var(--non-stop-line);
+}
+
+.non-stop-theme .non-stop-option-group .form__label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.2rem;
+  margin-bottom: 1.2rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.non-stop-option-group__selected {
+  color: var(--non-stop-ink-soft);
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.non-stop-color-pivot {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.non-stop-color-pivot__item,
+.non-stop-size-pivot__item {
+  position: relative;
+  min-width: 0;
+}
+
+.non-stop-variant-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.non-stop-color-pivot__label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  min-height: 12.8rem;
+  padding: 0.6rem;
+  border: 1px solid transparent;
+  background: var(--non-stop-sand);
+  color: var(--non-stop-ink);
+  cursor: pointer;
+  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+
+.non-stop-color-pivot__label:hover {
+  transform: translateY(-2px);
+}
+
+.non-stop-variant-input:checked + .non-stop-color-pivot__label {
+  border-color: var(--non-stop-ink);
+  background: #fff;
+}
+
+.non-stop-variant-input:focus-visible + .non-stop-color-pivot__label,
+.non-stop-variant-input:focus-visible + .non-stop-size-pivot__label {
+  outline: 2px solid var(--non-stop-ink);
+  outline-offset: 3px;
+}
+
+.non-stop-variant-input.disabled + .non-stop-color-pivot__label,
+.non-stop-variant-input.disabled + .non-stop-size-pivot__label {
+  opacity: 0.42;
+}
+
+.non-stop-color-pivot__media {
+  display: grid;
+  place-items: center;
+  min-height: 8.8rem;
+  overflow: hidden;
+  background: var(--non-stop-cream);
+}
+
+.non-stop-color-pivot__image {
+  display: block;
+  width: 100%;
+  height: 8.8rem;
+  object-fit: contain;
+}
+
+.non-stop-color-pivot__swatch {
+  display: block;
+  width: 4.8rem;
+  height: 4.8rem;
+  border-radius: 50%;
+  background: var(--non-stop-swatch, var(--non-stop-ink-soft));
+  box-shadow: inset 0 0 0 1px rgba(23, 26, 28, 0.16);
+}
+
+.non-stop-color-pivot__swatch--fallback {
+  background: linear-gradient(135deg, var(--non-stop-ink-soft), var(--non-stop-sand));
+}
+
+.non-stop-color-pivot__name {
+  padding: 0 0.4rem 0.3rem;
+  font-size: 1.2rem;
+  line-height: 1.1;
+  text-align: left;
+}
+
+.non-stop-size-pivot {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.non-stop-size-pivot__label {
+  display: flex;
+  align-items: center;
+  min-height: 4.8rem;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--non-stop-line);
+  background: transparent;
+  color: var(--non-stop-ink);
+  cursor: pointer;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  transition: border-color 180ms ease, background-color 180ms ease;
+}
+
+.non-stop-variant-input:checked + .non-stop-size-pivot__label {
+  border-color: var(--non-stop-ink);
+  background: var(--non-stop-ink);
+  color: #fff;
+}
+
+.non-stop-size-pivot__unavailable {
+  display: block;
+  margin-left: auto;
+  color: currentColor;
+  font-size: 1rem;
+  opacity: 0.62;
+}
+
+.non-stop-theme .product--thumbnail_slider .product__media-wrapper {
+  align-self: start;
+}
+
+.non-stop-theme .product--thumbnail_slider .thumbnail-list {
+  gap: 0.8rem;
+}
+
+.non-stop-theme .product--thumbnail_slider .thumbnail {
+  border: 1px solid var(--non-stop-line);
+  background: var(--non-stop-sand);
+}
+
+.non-stop-theme .product--thumbnail_slider .thumbnail[aria-current='true'] {
+  border-color: var(--non-stop-ink);
+}
+
 .non-stop-theme .product-form__submit {
   width: 100%;
   min-height: 5.4rem;
@@ -829,6 +996,24 @@ body.non-stop-theme {
     padding: 2.4rem 1.6rem;
     border-right: 0;
     border-left: 0;
+  }
+
+  .non-stop-color-pivot {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .non-stop-color-pivot__label {
+    min-height: 11.2rem;
+  }
+
+  .non-stop-color-pivot__media,
+  .non-stop-color-pivot__image {
+    min-height: 7.4rem;
+    height: 7.4rem;
+  }
+
+  .non-stop-size-pivot {
+    grid-template-columns: 1fr;
   }
 
   .non-stop-pdp-story__grid {

@@ -1,0 +1,104 @@
+{% doc %}
+  Renders Non-Stop image-led color options or compact size options.
+
+  @param {product} product - The current product.
+  @param {product_option} option - The product option being rendered.
+  @param {object} block - The variant picker block settings.
+  @param {string} picker_type - Either color or size.
+  @param {string} product_form_id - The product form ID.
+  @param {string} section_id - The current section ID.
+{% enddoc %}
+
+{%- for value in option.values -%}
+  {%- liquid
+    assign option_disabled = true
+    if value.available
+      assign option_disabled = false
+    endif
+
+    capture input_id
+      echo section_id
+      echo '-'
+      echo option.position
+      echo '-'
+      echo forloop.index0
+    endcapture
+
+    capture input_name
+      echo option.name
+      echo '-'
+      echo option.position
+    endcapture
+
+    capture input_dataset
+      echo 'data-product-url="'
+      echo value.product_url
+      echo '" data-option-value-id="'
+      echo value.id
+      echo '"'
+    endcapture
+  -%}
+
+  {%- if picker_type == 'color' -%}
+    <div class="non-stop-color-pivot__item">
+      <input
+        type="radio"
+        id="{{ input_id }}"
+        name="{{ input_name | escape }}"
+        value="{{ value | escape }}"
+        form="{{ product_form_id }}"
+        class="non-stop-variant-input{% if option_disabled %} disabled{% endif %}"
+        {% if value.selected %}
+          checked
+        {% endif %}
+        {{ input_dataset }}
+      >
+      <label class="non-stop-color-pivot__label" for="{{ input_id }}">
+        <span class="non-stop-color-pivot__media">
+          {%- if value.variant and value.variant.featured_image -%}
+            {{
+              value.variant.featured_image
+              | image_url: width: 240
+              | image_tag: loading: 'lazy', class: 'non-stop-color-pivot__image', alt: value
+            }}
+          {%- elsif value.swatch.image -%}
+            {{
+              value.swatch.image
+              | image_url: width: 240
+              | image_tag: loading: 'lazy', class: 'non-stop-color-pivot__image', alt: value
+            }}
+          {%- elsif value.swatch.color -%}
+            <span class="non-stop-color-pivot__swatch" style="--non-stop-swatch: rgb({{ value.swatch.color.rgb }});"></span>
+          {%- else -%}
+            <span class="non-stop-color-pivot__swatch non-stop-color-pivot__swatch--fallback"></span>
+          {%- endif -%}
+        </span>
+        <span class="non-stop-color-pivot__name">{{ value }}</span>
+        {%- if option_disabled -%}
+          <span class="visually-hidden">{{ 'products.product.value_unavailable' | t: option_value: value }}</span>
+        {%- endif -%}
+      </label>
+    </div>
+  {%- else -%}
+    <div class="non-stop-size-pivot__item">
+      <input
+        type="radio"
+        id="{{ input_id }}"
+        name="{{ input_name | escape }}"
+        value="{{ value | escape }}"
+        form="{{ product_form_id }}"
+        class="non-stop-variant-input{% if option_disabled %} disabled{% endif %}"
+        {% if value.selected %}
+          checked
+        {% endif %}
+        {{ input_dataset }}
+      >
+      <label class="non-stop-size-pivot__label" for="{{ input_id }}">
+        <span>{{ value }}</span>
+        {%- if option_disabled -%}
+          <span class="non-stop-size-pivot__unavailable">{{ 'products.product.value_unavailable' | t: option_value: value }}</span>
+        {%- endif -%}
+      </label>
+    </div>
+  {%- endif -%}
+{%- endfor -%}

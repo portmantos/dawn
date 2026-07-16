@@ -79,10 +79,10 @@
       "block_order": ["vendor", "title", "caption", "price", "variant_picker", "quantity_selector", "buy_buttons", "description", "shipping", "dimensions", "care", "share"],
       "settings": {
         "enable_sticky_info": true,
-        "gallery_layout": "stacked",
+        "gallery_layout": "thumbnail_slider",
         "media_size": "large",
         "constrain_to_viewport": true,
-        "mobile_thumbnails": "hide",
+        "mobile_thumbnails": "show",
         "hide_variants": true,
         "enable_video_looping": false,
         "padding_top": 52,
