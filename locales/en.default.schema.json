@@ -2067,6 +2067,14 @@
             }
           }
         },
+        "feature_badges": {
+          "name": "Feature badges",
+          "settings": {
+            "max_items": {
+              "label": "Maximum features"
+            }
+          }
+        },
         "pickup_availability": {
           "name": "Pickup availability"
         },

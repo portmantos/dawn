@@ -41,6 +41,8 @@
       assign ratio = 1
     endif
 
+    assign card_title = card_product.metafields.custom.card_title.value | default: card_product.title
+
     assign color_option = null
     for product_option in card_product.options_with_values
       assign option_name = product_option.name | downcase
@@ -132,7 +134,7 @@
                 class="full-unstyled-link"
                 aria-labelledby="StandardCardNoMediaLink-{{ section_id }}-{{ card_product.id }} NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
               >
-                {{ card_product.title | escape }}
+                {{ card_title | escape }}
               </a>
             </h3>
           </div>
@@ -168,9 +170,10 @@
               data-card-product-link
               id="CardLink-{{ section_id }}-{{ card_product.id }}"
               class="full-unstyled-link"
+              title="{{ card_product.title | escape }}"
               aria-labelledby="CardLink-{{ section_id }}-{{ card_product.id }} Badge-{{ section_id }}-{{ card_product.id }}"
             >
-              {{ card_product.title | escape }}
+              {{ card_title | escape }}
             </a>
           </h3>
           <div class="card-information">

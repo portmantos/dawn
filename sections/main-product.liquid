@@ -473,6 +473,8 @@
                   section_id: section.id,
                   show_pickup_availability: true
                 -%}
+              {%- when 'feature_badges' -%}
+                {% render 'non-stop-feature-badges', product: product, block: block %}
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
                   <div class="rating-wrapper">
@@ -679,8 +681,13 @@
 
       {%- if product.description != blank -%}
         <section class="non-stop-pdp__description-card" aria-labelledby="ProductDescriptionHeading-{{ section.id }}">
-          <h2 id="ProductDescriptionHeading-{{ section.id }}">{{ 'products.product.description' | t }}</h2>
-          <div class="rte">{{ product.description }}</div>
+          <details>
+            <summary>
+              <span class="h2" id="ProductDescriptionHeading-{{ section.id }}">{{ 'products.product.description' | t }}</span>
+              {{- 'icon-caret.svg' | inline_asset_content -}}
+            </summary>
+            <div class="rte">{{ product.description }}</div>
+          </details>
         </section>
       {%- endif -%}
 
@@ -954,6 +961,22 @@
           "default": true,
           "label": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.label",
           "info": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.info"
+        }
+      ]
+    },
+    {
+      "type": "feature_badges",
+      "name": "t:sections.main-product.blocks.feature_badges.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "range",
+          "id": "max_items",
+          "min": 2,
+          "max": 6,
+          "step": 1,
+          "default": 4,
+          "label": "t:sections.main-product.blocks.feature_badges.settings.max_items.label"
         }
       ]
     },

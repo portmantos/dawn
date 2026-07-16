@@ -53,6 +53,12 @@
             "show_gift_card_recipient": true
           }
         },
+        "feature_badges": {
+          "type": "feature_badges",
+          "settings": {
+            "max_items": 4
+          }
+        },
         "description": {
           "type": "description",
           "settings": {}
@@ -93,6 +99,7 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
+        "feature_badges",
         "description",
         "shipping",
         "dimensions",

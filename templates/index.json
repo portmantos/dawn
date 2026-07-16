@@ -92,14 +92,14 @@
       "settings": {
         "collection": "all",
         "products_to_show": 6,
-        "title": "Featured products",
+        "title": "A few of our favorites",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "columns_desktop": 6,
-        "enable_desktop_slider": false,
-        "full_width": false,
+        "columns_desktop": 4,
+        "enable_desktop_slider": true,
+        "full_width": true,
         "show_view_all": false,
         "view_all_style": "solid",
         "color_scheme": "scheme-1",
@@ -111,8 +111,8 @@
         "quick_add": "none",
         "columns_mobile": "1",
         "swipe_on_mobile": true,
-        "padding_top": 0,
-        "padding_bottom": 0
+        "padding_top": 36,
+        "padding_bottom": 56
       }
     },
     "video": {

@@ -1,0 +1,105 @@
+{% doc %}
+  Renders compact, data-driven product feature badges.
+
+  @param {product} product - Product whose metafields provide the feature data.
+  @param {object} block - Product information block settings and editor attributes.
+
+  @example
+  {% render 'non-stop-feature-badges', product: product, block: block %}
+{% enddoc %}
+{%- liquid
+  assign luggage_type = product.metafields.custom.luggage_type.value | downcase
+  assign packing_cube_count = product.metafields.custom.packing_cubes_included.value | default: 0 | plus: 0
+  assign max_items = block.settings.max_items | default: 4
+  assign badge_count = 0
+  assign is_power_product = false
+  assign has_features = false
+
+  if luggage_type contains 'power bank'
+    assign is_power_product = true
+  endif
+
+  if luggage_type != blank or product.metafields.custom.tsa_lock.value or product.metafields.custom.expandable.value or product.metafields.custom.spinner_wheels.value or product.metafields.custom.usb_charging.value or product.metafields.custom.power_bank_included.value or packing_cube_count > 0
+    assign has_features = true
+  endif
+-%}
+
+{%- if has_features -%}
+  <div class="non-stop-feature-badges" {{ block.shopify_attributes }}>
+    <p class="non-stop-feature-badges__eyebrow">{{ 'products.product.feature_highlights' | t }}</p>
+    <ul class="non-stop-feature-badges__list" role="list">
+      {%- if luggage_type contains 'set' and badge_count < max_items -%}
+        <li class="non-stop-feature-badges__item">
+          {% render 'icon-accordion', icon: 'box' %}
+          <span>{{ 'products.product.three_piece_luggage_set' | t }}</span>
+        </li>
+        {%- assign badge_count = badge_count | plus: 1 -%}
+      {%- elsif luggage_type contains 'carry-on' and badge_count < max_items -%}
+        <li class="non-stop-feature-badges__item">
+          {% render 'icon-accordion', icon: 'plane' %}
+          <span>{{ 'products.product.carry_on_fit' | t }}</span>
+        </li>
+        {%- assign badge_count = badge_count | plus: 1 -%}
+      {%- elsif luggage_type contains 'checked' and badge_count < max_items -%}
+        <li class="non-stop-feature-badges__item">
+          {% render 'icon-accordion', icon: 'box' %}
+          <span>{{ 'products.product.checked_luggage' | t }}</span>
+        </li>
+        {%- assign badge_count = badge_count | plus: 1 -%}
+      {%- elsif is_power_product and badge_count < max_items -%}
+        <li class="non-stop-feature-badges__item">
+          {% render 'icon-accordion', icon: 'lightning_bolt' %}
+          <span>{{ 'products.product.portable_travel_power' | t }}</span>
+        </li>
+        {%- assign badge_count = badge_count | plus: 1 -%}
+      {%- endif -%}
+
+      {%- if product.metafields.custom.power_bank_included.value and is_power_product == false and badge_count < max_items -%}
+        <li class="non-stop-feature-badges__item">
+          {% render 'icon-accordion', icon: 'lightning_bolt' %}
+          <span>{{ 'products.product.power_bank_included_badge' | t }}</span>
+        </li>
+        {%- assign badge_count = badge_count | plus: 1 -%}
+      {%- endif -%}
+
+      {%- if product.metafields.custom.tsa_lock.value and badge_count < max_items -%}
+        <li class="non-stop-feature-badges__item">
+          {% render 'icon-accordion', icon: 'lock' %}
+          <span>{{ 'products.product.tsa_combination_lock' | t }}</span>
+        </li>
+        {%- assign badge_count = badge_count | plus: 1 -%}
+      {%- endif -%}
+
+      {%- if packing_cube_count > 0 and badge_count < max_items -%}
+        <li class="non-stop-feature-badges__item">
+          {% render 'icon-accordion', icon: 'box' %}
+          <span>{{ 'products.product.packing_cubes_included_badge' | t: count: packing_cube_count }}</span>
+        </li>
+        {%- assign badge_count = badge_count | plus: 1 -%}
+      {%- endif -%}
+
+      {%- if product.metafields.custom.expandable.value and badge_count < max_items -%}
+        <li class="non-stop-feature-badges__item">
+          {% render 'icon-accordion', icon: 'ruler' %}
+          <span>{{ 'products.product.expandable_capacity' | t }}</span>
+        </li>
+        {%- assign badge_count = badge_count | plus: 1 -%}
+      {%- endif -%}
+
+      {%- if product.metafields.custom.usb_charging.value and badge_count < max_items -%}
+        <li class="non-stop-feature-badges__item">
+          {% render 'icon-accordion', icon: 'lightning_bolt' %}
+          <span>{{ 'products.product.usb_charging_ready' | t }}</span>
+        </li>
+        {%- assign badge_count = badge_count | plus: 1 -%}
+      {%- endif -%}
+
+      {%- if product.metafields.custom.spinner_wheels.value and badge_count < max_items -%}
+        <li class="non-stop-feature-badges__item">
+          {% render 'icon-accordion', icon: 'return' %}
+          <span>{{ 'products.product.spinner_wheels_360' | t }}</span>
+        </li>
+      {%- endif -%}
+    </ul>
+  </div>
+{%- endif -%}
