@@ -48,6 +48,7 @@
         value="{{ value | escape }}"
         form="{{ product_form_id }}"
         class="non-stop-variant-input{% if option_disabled %} disabled{% endif %}"
+        {% if value.variant %}data-gallery-variant-id="{{ value.variant.id }}"{% endif %}
         {% if value.selected %}
           checked
         {% endif %}
@@ -96,6 +97,7 @@
         value="{{ value | escape }}"
         form="{{ product_form_id }}"
         class="non-stop-variant-input{% if option_disabled %} disabled{% endif %}"
+        {% if value.variant %}data-gallery-variant-id="{{ value.variant.id }}"{% endif %}
         {% if value.selected %}
           checked
         {% endif %}

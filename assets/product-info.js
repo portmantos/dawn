@@ -208,6 +208,7 @@ if (!customElements.get('product-info')) {
               variant,
             },
           });
+          this.dispatchEvent(new CustomEvent('non-stop-variant-change', { bubbles: true, detail: { variant } }));
         };
       }
 

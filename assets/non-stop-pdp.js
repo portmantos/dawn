@@ -3,9 +3,20 @@ class NonStopProductGallery {
     this.root = root;
     this.variants = root.querySelectorAll('[data-variant-gallery]');
     this.bindThumbnails();
+    this.bindVariantFallback();
+    this.productInfo = root.closest('product-info');
+    this.productInfo?.addEventListener('non-stop-variant-change', (event) => this.showVariant(event.detail?.variant?.id));
     this.unsubscribe = typeof subscribe === 'function' && typeof PUB_SUB_EVENTS !== 'undefined'
       ? subscribe(PUB_SUB_EVENTS.variantChange, (event) => this.showVariant(event?.data?.variant?.id))
       : null;
+  }
+
+  bindVariantFallback() {
+    document.addEventListener('change', (event) => {
+      const input = event.target.closest('.non-stop-variant-input:checked');
+      if (!input || !input.dataset.galleryVariantId || !this.root.contains(input)) return;
+      this.showVariant(input.dataset.galleryVariantId);
+    });
   }
 
   bindThumbnails() {
@@ -25,7 +36,7 @@ class NonStopProductGallery {
 
   showVariant(variantId) {
     if (!variantId) return;
-    const target = this.root.querySelector(`[data-variant-gallery="${variantId}"]`);
+    const target = [...this.variants].find((variant) => variant.dataset.variantGallery === String(variantId));
     if (!target) return;
     this.variants.forEach((variant) => variant.classList.toggle('hidden', variant !== target));
     target.querySelector('.non-stop-gallery__thumb')?.click();
