@@ -10,6 +10,9 @@ if (!customElements.get('product-card-swatches')) {
         const button = event.target.closest('[data-variant-url]');
         if (!button) return;
 
+        event.preventDefault();
+        event.stopPropagation();
+
         const card = this.closest('.product-card-wrapper');
         const image = card?.querySelector('[data-card-primary-image]');
         const imageSource = button.dataset.imageSrc;

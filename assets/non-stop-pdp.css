@@ -61,17 +61,20 @@
 .non-stop-pdp .price__badge-sale {
   display: inline-flex;
   align-items: center;
-  min-height: 2.4rem;
-  padding: 0 .8rem;
+  justify-content: center;
+  min-height: 2.6rem;
+  padding: 0 1rem;
   border-radius: 999px;
+  line-height: 1;
 }
 
 .non-stop-pdp .non-stop-discount-badge {
   display: inline-flex;
   align-items: center;
-  min-height: 2.4rem;
+  justify-content: center;
+  min-height: 2.6rem;
   margin-left: .8rem;
-  padding: 0 .8rem;
+  padding: 0 1rem;
   border-radius: 999px;
   background: var(--non-stop-sale);
   color: #fff;

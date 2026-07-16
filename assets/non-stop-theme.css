@@ -182,13 +182,25 @@ body.non-stop-theme {
 }
 
 .non-stop-theme .price__badge-sale,
-.non-stop-theme .non-stop-sale-badge {
+.non-stop-theme .non-stop-sale-badge,
+.non-stop-theme .non-stop-discount-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: 2.6rem;
+  padding: 0 1rem;
   border-color: var(--non-stop-sale);
   background: var(--non-stop-sale);
   color: #fff;
+  line-height: 1;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .non-stop-card-swatches {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-wrap: wrap;
   gap: 0.7rem;
