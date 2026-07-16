@@ -11,7 +11,10 @@
           }
         },
         "title": {
-          "type": "title"
+          "type": "title",
+          "settings": {
+            "title_size": 34
+          }
         },
         "caption": {
           "type": "text",

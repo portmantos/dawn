@@ -1,36 +1,116 @@
+{% doc %}
+  Renders product metafields as structured PDP detail cards.
+
+  @param {product} product - The current product.
+{% enddoc %}
+
 {%- liquid
   assign feature_bullets = product.metafields.custom.feature_bullets.value
-  assign material = product.metafields.custom.material.value | default: product.metafields.custom.materials.value
-  assign dimensions = product.metafields.custom.dimensions.value
-  assign capacity = product.metafields.custom.capacity.value
-  assign weight = product.metafields.custom.weight.value
-  assign warranty = product.metafields.custom.warranty.value
-  assign care = product.metafields.custom.care_instructions.value | default: product.metafields.custom.care.value
-  assign has_facts = false
-  if feature_bullets != blank or material != blank or dimensions != blank or capacity != blank or weight != blank or warranty != blank or care != blank
-    assign has_facts = true
+  assign included_items = product.metafields.custom.included_items.value
+  assign product_badges = product.metafields.custom.product_badges.value
+  assign luggage_type = product.metafields.custom.luggage_type.value
+  assign shell_material = product.metafields.custom.shell_material.value
+  assign case_dimensions = product.metafields.custom.case_dimensions.value
+  assign case_weight = product.metafields.custom.case_weight
+  assign capacity = product.metafields.custom.capacity
+  assign expansion_size = product.metafields.custom.expansion_size
+  assign care_instructions = product.metafields.custom.care_instructions
+
+  assign has_specs = false
+  if luggage_type != blank or shell_material != blank or case_weight != blank or capacity != blank or product.metafields.custom.expandable != blank or expansion_size != blank or product.metafields.custom.spinner_wheels != blank or product.metafields.custom.tsa_lock != blank or product.metafields.custom.usb_charging != blank or product.metafields.custom.power_bank_included != blank or product.metafields.custom.packing_cubes_included != blank
+    assign has_specs = true
+  endif
+
+  assign has_dimensions = false
+  if case_dimensions != blank and case_dimensions.items != blank
+    assign has_dimensions = true
+  endif
+
+  assign has_details = false
+  if feature_bullets != blank or included_items != blank or product_badges != blank or has_specs or has_dimensions or care_instructions != blank
+    assign has_details = true
   endif
 -%}
 
-{%- if has_facts -%}
-  <div class="non-stop-product-facts">
-    {%- if feature_bullets != blank -%}
-      <div class="non-stop-product-facts__features">
-        <p class="non-stop-product-facts__eyebrow">{{ 'products.product.highlights' | t }}</p>
-        <ul role="list">
-          {%- for bullet in feature_bullets limit: 5 -%}
-            <li>{{ bullet }}</li>
-          {%- endfor -%}
-        </ul>
-      </div>
+{%- if has_details -%}
+  <section class="non-stop-product-details" aria-labelledby="ProductDetailsHeading-{{ product.id }}">
+    <header class="non-stop-product-details__header">
+      <p class="non-stop-product-details__eyebrow">{{ 'products.product.product_details' | t }}</p>
+      <h2 id="ProductDetailsHeading-{{ product.id }}">{{ 'products.product.specifications' | t }}</h2>
+    </header>
+
+    {%- if product_badges != blank -%}
+      <ul class="non-stop-product-details__badges" role="list">
+        {%- for badge in product_badges -%}
+          <li>{{ badge }}</li>
+        {%- endfor -%}
+      </ul>
     {%- endif -%}
-    <dl class="non-stop-product-facts__grid">
-      {%- if material != blank -%}<div><dt>{{ 'products.product.material' | t }}</dt><dd>{{ material }}</dd></div>{%- endif -%}
-      {%- if dimensions != blank -%}<div><dt>{{ 'products.product.dimensions' | t }}</dt><dd>{{ dimensions }}</dd></div>{%- endif -%}
-      {%- if capacity != blank -%}<div><dt>{{ 'products.product.capacity' | t }}</dt><dd>{{ capacity }}</dd></div>{%- endif -%}
-      {%- if weight != blank -%}<div><dt>{{ 'products.product.weight' | t }}</dt><dd>{{ weight }}</dd></div>{%- endif -%}
-      {%- if warranty != blank -%}<div><dt>{{ 'products.product.warranty' | t }}</dt><dd>{{ warranty }}</dd></div>{%- endif -%}
-      {%- if care != blank -%}<div><dt>{{ 'products.product.care' | t }}</dt><dd>{{ care }}</dd></div>{%- endif -%}
-    </dl>
-  </div>
+
+    <div class="non-stop-product-details__grid">
+      {%- if feature_bullets != blank -%}
+        <article class="non-stop-product-details__card">
+          <h3>{{ 'products.product.highlights' | t }}</h3>
+          <ul class="non-stop-product-details__list" role="list">
+            {%- for bullet in feature_bullets -%}
+              <li>{{ bullet }}</li>
+            {%- endfor -%}
+          </ul>
+        </article>
+      {%- endif -%}
+
+      {%- if has_specs -%}
+        <article class="non-stop-product-details__card">
+          <h3>{{ 'products.product.specifications' | t }}</h3>
+          <dl class="non-stop-product-details__specs">
+            {%- if luggage_type != blank -%}<div><dt>{{ 'products.product.luggage_type' | t }}</dt><dd>{{ luggage_type }}</dd></div>{%- endif -%}
+            {%- if shell_material != blank -%}<div><dt>{{ 'products.product.material' | t }}</dt><dd>{{ shell_material | join: ', ' }}</dd></div>{%- endif -%}
+            {%- if case_weight != blank -%}<div><dt>{{ 'products.product.weight' | t }}</dt><dd>{{ case_weight | metafield_text }}</dd></div>{%- endif -%}
+            {%- if capacity != blank -%}<div><dt>{{ 'products.product.capacity' | t }}</dt><dd>{{ capacity | metafield_text }}</dd></div>{%- endif -%}
+            {%- if product.metafields.custom.expandable != blank -%}<div><dt>{{ 'products.product.expandable' | t }}</dt><dd>{% if product.metafields.custom.expandable.value %}{{ 'products.product.yes' | t }}{% else %}{{ 'products.product.no' | t }}{% endif %}</dd></div>{%- endif -%}
+            {%- if expansion_size != blank -%}<div><dt>{{ 'products.product.expansion_size' | t }}</dt><dd>{{ expansion_size | metafield_text }}</dd></div>{%- endif -%}
+            {%- if product.metafields.custom.spinner_wheels != blank -%}<div><dt>{{ 'products.product.spinner_wheels' | t }}</dt><dd>{% if product.metafields.custom.spinner_wheels.value %}{{ 'products.product.yes' | t }}{% else %}{{ 'products.product.no' | t }}{% endif %}</dd></div>{%- endif -%}
+            {%- if product.metafields.custom.tsa_lock != blank -%}<div><dt>{{ 'products.product.tsa_lock' | t }}</dt><dd>{% if product.metafields.custom.tsa_lock.value %}{{ 'products.product.yes' | t }}{% else %}{{ 'products.product.no' | t }}{% endif %}</dd></div>{%- endif -%}
+            {%- if product.metafields.custom.usb_charging != blank -%}<div><dt>{{ 'products.product.usb_charging' | t }}</dt><dd>{% if product.metafields.custom.usb_charging.value %}{{ 'products.product.yes' | t }}{% else %}{{ 'products.product.no' | t }}{% endif %}</dd></div>{%- endif -%}
+            {%- if product.metafields.custom.power_bank_included != blank -%}<div><dt>{{ 'products.product.power_bank' | t }}</dt><dd>{% if product.metafields.custom.power_bank_included.value %}{{ 'products.product.included' | t }}{% else %}{{ 'products.product.not_included' | t }}{% endif %}</dd></div>{%- endif -%}
+            {%- if product.metafields.custom.packing_cubes_included != blank -%}<div><dt>{{ 'products.product.packing_cubes' | t }}</dt><dd>{% if product.metafields.custom.packing_cubes_included.value %}{{ 'products.product.included' | t }}{% else %}{{ 'products.product.not_included' | t }}{% endif %}</dd></div>{%- endif -%}
+          </dl>
+        </article>
+      {%- endif -%}
+
+      {%- if has_dimensions -%}
+        <article class="non-stop-product-details__card">
+          <h3>{{ 'products.product.dimensions' | t }}</h3>
+          <dl class="non-stop-product-details__dimensions">
+            {%- for item in case_dimensions.items -%}
+              <div>
+                <dt>{{ item.label }}</dt>
+                <dd>{{ item.height }} × {{ item.width }} × {{ item.depth }} {{ case_dimensions.unit }}</dd>
+              </div>
+            {%- endfor -%}
+          </dl>
+        </article>
+      {%- endif -%}
+
+      {%- if included_items != blank -%}
+        <article class="non-stop-product-details__card">
+          <h3>{{ 'products.product.included_items' | t }}</h3>
+          <ul class="non-stop-product-details__list" role="list">
+            {%- for item in included_items -%}
+              <li>{{ item }}</li>
+            {%- endfor -%}
+          </ul>
+        </article>
+      {%- endif -%}
+
+      {%- if care_instructions != blank -%}
+        <article class="non-stop-product-details__card non-stop-product-details__card--care">
+          <h3>{{ 'products.product.care' | t }}</h3>
+          <div class="non-stop-product-details__richtext rte">
+            {{ care_instructions | metafield_tag }}
+          </div>
+        </article>
+      {%- endif -%}
+    </div>
+  </section>
 {%- endif -%}

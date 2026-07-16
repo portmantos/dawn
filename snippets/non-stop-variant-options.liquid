@@ -1,9 +1,7 @@
 {% doc %}
   Renders Non-Stop image-led color options or compact size options.
 
-  @param {product} product - The current product.
   @param {product_option} option - The product option being rendered.
-  @param {object} block - The variant picker block settings.
   @param {string} picker_type - Either color or size.
   @param {string} product_form_id - The product form ID.
   @param {string} section_id - The current section ID.
@@ -56,9 +54,12 @@
       >
       <label class="non-stop-color-pivot__label" for="{{ input_id }}">
         <span class="non-stop-color-pivot__media">
+          {%- assign variant_swatch_color = value.variant.metafields.custom.swatch_color.value -%}
           {%- assign variant_gallery = value.variant.metafields.custom.variant_gallery.value -%}
           {%- assign variant_swatch_image = variant_gallery | first -%}
-          {%- if variant_swatch_image -%}
+          {%- if variant_swatch_color != blank -%}
+            <span class="non-stop-color-pivot__swatch" style="--non-stop-swatch: {{ variant_swatch_color }};"></span>
+          {%- elsif variant_swatch_image -%}
             {{
               variant_swatch_image
               | image_url: width: 240
