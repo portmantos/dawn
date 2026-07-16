@@ -72,10 +72,20 @@ class NonStopProductGallery {
 
   showVariant(variantId) {
     if (!variantId) return;
+    this.showKitVariant(variantId);
     const target = [...this.variants].find((variant) => variant.dataset.variantGallery === String(variantId));
     if (!target) return;
     this.variants.forEach((variant) => variant.classList.toggle('hidden', variant !== target));
     this.selectThumbnail(target.querySelector('.non-stop-gallery__thumb'));
+  }
+
+  showKitVariant(variantId) {
+    const kitRoot = this.productInfo?.querySelector('[data-non-stop-kit-components]');
+    if (!kitRoot) return;
+    const kitVariants = [...kitRoot.querySelectorAll('[data-kit-variant]')];
+    const target = kitVariants.find((variant) => variant.dataset.kitVariant === String(variantId));
+    kitVariants.forEach((variant) => variant.classList.toggle('hidden', variant !== target));
+    kitRoot.classList.toggle('hidden', !target);
   }
 }
 

@@ -1065,6 +1065,42 @@
     "header": {
       "name": "Header",
       "settings": {
+        "header_style": {
+          "label": "Header style",
+          "options__1": {
+            "label": "Classic bar"
+          },
+          "options__2": {
+            "label": "Catalog emphasis"
+          },
+          "options__3": {
+            "label": "Floating"
+          }
+        },
+        "header_width": {
+          "label": "Content width",
+          "options__1": {
+            "label": "Page"
+          },
+          "options__2": {
+            "label": "Wide"
+          },
+          "options__3": {
+            "label": "Full width"
+          }
+        },
+        "navigation_style": {
+          "label": "Navigation style",
+          "options__1": {
+            "label": "Plain"
+          },
+          "options__2": {
+            "label": "Underline"
+          },
+          "options__3": {
+            "label": "Pills"
+          }
+        },
         "logo_help": {
           "content": "Edit your logo in [theme settings](/editor?context=theme&category=logo)"
         },

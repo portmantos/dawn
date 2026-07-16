@@ -1,5 +1,5 @@
 {% doc %}
-  Renders exact component variants for a kit and falls back to product references.
+  Renders the exact component variants stored on each kit variant.
 
   @param {product} product - The current product.
   @param {string} section_id - The section ID used for variant refreshes.
@@ -8,17 +8,23 @@
 {%- liquid
   assign is_kit = product.metafields.custom.is_kit.value
   assign selected_variant = product.selected_or_first_available_variant
-  assign component_variants = selected_variant.metafields.custom.kit_component_variants.value
-  assign component_products = product.metafields.custom.kit_component_products.value
   assign has_components = false
-  if is_kit and component_variants != blank
-    assign has_components = true
-  elsif is_kit and component_products != blank
-    assign has_components = true
+
+  if is_kit
+    for kit_variant in product.variants
+      if kit_variant.metafields.custom.kit_component_variants.value != blank
+        assign has_components = true
+        break
+      endif
+    endfor
   endif
 -%}
 
-<div id="KitComponents-{{ section_id }}" class="non-stop-kit-components-source{% unless has_components %} hidden{% endunless %}">
+<div
+  id="KitComponents-{{ section_id }}"
+  class="non-stop-kit-components-source{% unless has_components %} hidden{% endunless %}"
+  data-non-stop-kit-components
+>
   {%- if has_components -%}
     <section class="non-stop-kit-components" aria-labelledby="KitComponentsHeading-{{ section_id }}">
       <header class="non-stop-kit-components__header">
@@ -28,48 +34,41 @@
         </div>
         <p>{{ 'products.product.kit_contents_intro' | t }}</p>
       </header>
-      <div class="non-stop-kit-components__grid">
+
+      {%- for kit_variant in product.variants -%}
+        {%- assign component_variants = kit_variant.metafields.custom.kit_component_variants.value -%}
         {%- if component_variants != blank -%}
-          {%- for component_variant in component_variants -%}
-            {%- liquid
-              assign component_product = component_variant.product
-              assign component_gallery = component_variant.metafields.custom.variant_gallery.value
-              assign component_image = component_gallery | first
-              if component_image == blank
-                assign component_image = component_variant.featured_image | default: component_product.featured_image
-              endif
-            -%}
-            <a class="non-stop-kit-components__card" href="{{ component_product.url }}?variant={{ component_variant.id }}">
-              <span class="non-stop-kit-components__image">
-                {%- if component_image != blank -%}
-                  {{ component_image | image_url: width: 480 | image_tag: loading: 'lazy', alt: component_product.title }}
-                {%- endif -%}
-              </span>
-              <span class="non-stop-kit-components__copy">
-                <strong>{{ component_product.title }}</strong>
-                {%- unless component_variant.title == 'Default Title' -%}
-                  <span>{{ component_variant.title }}</span>
-                {%- endunless -%}
-                <small>{{ 'products.product.quantity_in_kit' | t: quantity: 1 }}</small>
-              </span>
-            </a>
-          {%- endfor -%}
-        {%- else -%}
-          {%- for component_product in component_products -%}
-            <a class="non-stop-kit-components__card" href="{{ component_product.url }}">
-              <span class="non-stop-kit-components__image">
-                {%- if component_product.featured_image != blank -%}
-                  {{ component_product.featured_image | image_url: width: 480 | image_tag: loading: 'lazy', alt: component_product.title }}
-                {%- endif -%}
-              </span>
-              <span class="non-stop-kit-components__copy">
-                <strong>{{ component_product.title }}</strong>
-                <small>{{ 'products.product.quantity_in_kit' | t: quantity: 1 }}</small>
-              </span>
-            </a>
-          {%- endfor -%}
+          <div
+            class="non-stop-kit-components__grid{% unless kit_variant.id == selected_variant.id %} hidden{% endunless %}"
+            data-kit-variant="{{ kit_variant.id }}"
+          >
+            {%- for component_variant in component_variants -%}
+              {%- liquid
+                assign component_product = component_variant.product
+                assign component_gallery = component_variant.metafields.custom.variant_gallery.value
+                assign component_image = component_gallery | first
+                if component_image == blank
+                  assign component_image = component_variant.featured_image | default: component_product.featured_image
+                endif
+              -%}
+              <a class="non-stop-kit-components__card" href="{{ component_product.url }}?variant={{ component_variant.id }}">
+                <span class="non-stop-kit-components__image">
+                  {%- if component_image != blank -%}
+                    {{ component_image | image_url: width: 480 | image_tag: loading: 'lazy', alt: component_product.title }}
+                  {%- endif -%}
+                </span>
+                <span class="non-stop-kit-components__copy">
+                  <strong>{{ component_product.title }}</strong>
+                  {%- unless component_variant.title == 'Default Title' -%}
+                    <span>{{ component_variant.title }}</span>
+                  {%- endunless -%}
+                  <small>{{ 'products.product.quantity_in_kit' | t: quantity: 1 }}</small>
+                </span>
+              </a>
+            {%- endfor -%}
+          </div>
         {%- endif -%}
-      </div>
+      {%- endfor -%}
     </section>
   {%- endif -%}
 </div>
