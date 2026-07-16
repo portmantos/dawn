@@ -5,7 +5,14 @@
   @param {section} section - The section that owns the gallery.
 {% enddoc %}
 
-{%- assign selected_variant = product.selected_or_first_available_variant -%}
+{%- liquid
+  assign selected_variant = product.selected_or_first_available_variant
+  assign selected_gallery = selected_variant.metafields.custom.variant_gallery.value
+  assign initial_lightbox_image = selected_gallery | first
+  if initial_lightbox_image == blank
+    assign initial_lightbox_image = selected_variant.featured_media.preview_image | default: product.media.first.preview_image
+  endif
+-%}
 
 <media-gallery
   id="MediaGallery-{{ section.id }}"
@@ -29,7 +36,13 @@
           {%- assign primary_image = variant_gallery | first -%}
           {%- assign primary_alt = primary_image.alt | default: product.title -%}
           <div class="non-stop-gallery__viewport">
-            <button class="non-stop-gallery__main" type="button" aria-label="{{ 'products.product.media.open_media' | t }}">
+            <button
+              class="non-stop-gallery__main"
+              type="button"
+              aria-haspopup="dialog"
+              aria-controls="NonStopGalleryLightbox-{{ section.id }}"
+              aria-label="{{ 'products.product.media.open_media' | t }}"
+            >
               {{ primary_image | image_url: width: 1800 | image_tag: class: 'non-stop-gallery__main-image', loading: 'eager', alt: primary_alt }}
             </button>
             {%- if variant_gallery.size > 1 -%}
@@ -52,6 +65,7 @@
                 class="non-stop-gallery__thumb{% if forloop.first %} is-active{% endif %}"
                 role="listitem"
                 data-gallery-image="{{ image | image_url: width: 1800 }}"
+                data-gallery-zoom="{{ image | image_url: width: 3000 }}"
                 data-gallery-alt="{{ image_alt | escape }}"
                 data-gallery-index="{{ forloop.index0 }}"
                 aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
@@ -63,7 +77,13 @@
           </div>
         {%- elsif fallback_image != blank -%}
           <div class="non-stop-gallery__viewport">
-            <button class="non-stop-gallery__main" type="button" aria-label="{{ 'products.product.media.open_media' | t }}">
+            <button
+              class="non-stop-gallery__main"
+              type="button"
+              aria-haspopup="dialog"
+              aria-controls="NonStopGalleryLightbox-{{ section.id }}"
+              aria-label="{{ 'products.product.media.open_media' | t }}"
+            >
               {{ fallback_image | image_url: width: 1800 | image_tag: class: 'non-stop-gallery__main-image', loading: 'eager', alt: product.title }}
             </button>
           </div>
@@ -73,6 +93,7 @@
               class="non-stop-gallery__thumb is-active"
               role="listitem"
               data-gallery-image="{{ fallback_image | image_url: width: 1800 }}"
+              data-gallery-zoom="{{ fallback_image | image_url: width: 3000 }}"
               data-gallery-alt="{{ product.title | escape }}"
               data-gallery-index="0"
               aria-current="true"
@@ -85,4 +106,33 @@
       </div>
     {%- endfor -%}
   </div>
+  {%- if initial_lightbox_image != blank -%}
+    <dialog
+      id="NonStopGalleryLightbox-{{ section.id }}"
+      class="non-stop-gallery-lightbox"
+      data-gallery-lightbox
+      aria-label="{{ 'products.modal.label' | t }}"
+    >
+      <div class="non-stop-gallery-lightbox__panel">
+        <button
+          type="button"
+          class="non-stop-gallery-lightbox__close"
+          data-gallery-lightbox-close
+          aria-label="{{ 'accessibility.close' | t }}"
+        >
+          {{- 'icon-close.svg' | inline_asset_content -}}
+        </button>
+        <div class="non-stop-gallery-lightbox__canvas">
+          {{
+            initial_lightbox_image
+            | image_url: width: 3000
+            | image_tag:
+              class: 'non-stop-gallery-lightbox__image',
+              loading: 'eager',
+              alt: initial_lightbox_image.alt | default: product.title
+          }}
+        </div>
+      </div>
+    </dialog>
+  {%- endif -%}
 </media-gallery>

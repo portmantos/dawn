@@ -3,7 +3,10 @@ class NonStopProductGallery {
     this.root = root;
     this.variants = root.querySelectorAll('[data-variant-gallery]');
     this.productInfo = root.closest('product-info');
+    this.lightbox = root.querySelector('[data-gallery-lightbox]');
+    this.lightboxImage = this.lightbox?.querySelector('.non-stop-gallery-lightbox__image');
     this.bindGalleryControls();
+    this.bindLightboxControls();
     this.bindVariantFallback();
     this.productInfo?.addEventListener('non-stop-variant-change', (event) => this.showVariant(event.detail?.variant?.id));
     this.unsubscribe = typeof subscribe === 'function' && typeof PUB_SUB_EVENTS !== 'undefined'
@@ -21,6 +24,18 @@ class NonStopProductGallery {
 
   bindGalleryControls() {
     this.root.addEventListener('click', (event) => {
+      const closeButton = event.target.closest('[data-gallery-lightbox-close]');
+      if (closeButton) {
+        this.closeLightbox();
+        return;
+      }
+
+      const mainButton = event.target.closest('.non-stop-gallery__main');
+      if (mainButton) {
+        this.openLightbox(mainButton);
+        return;
+      }
+
       const thumbnail = event.target.closest('[data-gallery-image]');
       if (thumbnail) {
         this.selectThumbnail(thumbnail);
@@ -41,6 +56,31 @@ class NonStopProductGallery {
       const gallery = thumbnail.closest('[data-variant-gallery]');
       this.moveGallery(gallery, event.key === 'ArrowRight' ? 1 : -1, true);
     });
+  }
+
+  bindLightboxControls() {
+    if (!this.lightbox) return;
+    this.lightbox.addEventListener('click', (event) => {
+      if (event.target === this.lightbox) this.closeLightbox();
+    });
+  }
+
+  openLightbox(mainButton) {
+    if (!this.lightbox || !this.lightboxImage || typeof this.lightbox.showModal !== 'function') return;
+    const gallery = mainButton.closest('[data-variant-gallery]');
+    const activeThumbnail = gallery?.querySelector('[data-gallery-image].is-active');
+    const zoomSource = activeThumbnail?.dataset.galleryZoom || activeThumbnail?.dataset.galleryImage;
+    if (!zoomSource) return;
+
+    this.lightboxImage.src = zoomSource;
+    this.lightboxImage.srcset = '';
+    this.lightboxImage.alt = activeThumbnail.dataset.galleryAlt || '';
+    this.lightbox.showModal();
+    this.lightbox.querySelector('[data-gallery-lightbox-close]')?.focus();
+  }
+
+  closeLightbox() {
+    if (this.lightbox?.open) this.lightbox.close();
   }
 
   selectThumbnail(thumbnail, focus = false) {
