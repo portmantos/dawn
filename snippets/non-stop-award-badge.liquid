@@ -1,0 +1,26 @@
+{% doc %}
+  Renders a product award badge from custom.award_badge.
+
+  @param {product} product - Product that owns the award badge metafield.
+  @param {string} context - Badge placement context: card or gallery.
+{% enddoc %}
+
+{%- liquid
+  assign award_file = product.metafields.custom.award_badge.value
+  assign award_image = award_file.preview_image
+  assign award_alt = award_file.alt | default: award_image.alt
+-%}
+
+{%- if award_image != blank -%}
+  <div class="non-stop-award-badge non-stop-award-badge--{{ context | default: 'card' }}">
+    {{-
+      award_image
+      | image_url: width: 240
+      | image_tag:
+        loading: 'lazy',
+        widths: '80, 120, 160, 240',
+        sizes: '96px',
+        alt: award_alt
+    -}}
+  </div>
+{%- endif -%}

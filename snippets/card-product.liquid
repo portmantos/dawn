@@ -119,6 +119,7 @@
             </div>
           </div>
         {%- endif -%}
+        {% render 'non-stop-award-badge', product: card_product, context: 'card' %}
         <div class="card__content">
           <div class="card__information">
             <h3
@@ -220,7 +221,9 @@
               </p>
             {%- endif -%}
 
-            {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
+            <div data-card-variant-price>
+              {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
+            </div>
             {%- if color_option and color_option.values.size > 1 -%}
               <product-card-swatches
                 class="non-stop-card-swatches"
@@ -236,6 +239,12 @@
                       assign swatch_image = swatch_variant.featured_image
                     endif
                     assign swatch_color = swatch_variant.metafields.custom.swatch_color.value
+                    assign swatch_money_price = swatch_variant.price | money
+                    assign swatch_money_compare_at = swatch_variant.compare_at_price | money
+                    if settings.currency_code_enabled
+                      assign swatch_money_price = swatch_variant.price | money_with_currency
+                      assign swatch_money_compare_at = swatch_variant.compare_at_price | money_with_currency
+                    endif
                   -%}
                   {%- if swatch_variant != blank -%}
                     <button
@@ -245,6 +254,9 @@
                       data-variant-url="{{ card_product.url }}?variant={{ swatch_variant.id }}"
                       data-image-src="{% if swatch_image != blank %}{{ swatch_image | image_url: width: 720 }}{% endif %}"
                       data-image-alt="{{ card_product.title | append: ' — ' | append: option_value | escape }}"
+                      data-variant-price="{{ swatch_money_price | escape }}"
+                      data-variant-compare-at-price="{{ swatch_money_compare_at | escape }}"
+                      data-variant-on-sale="{% if swatch_variant.compare_at_price > swatch_variant.price %}true{% else %}false{% endif %}"
                       aria-label="{{ 'products.product.view_color' | t: color: option_value }}"
                       aria-pressed="{% if swatch_variant.id == card_product.selected_or_first_available_variant.id %}true{% else %}false{% endif %}"
                     >

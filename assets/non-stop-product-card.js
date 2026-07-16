@@ -35,9 +35,27 @@ if (!customElements.get('product-card-swatches')) {
           link.href = button.dataset.variantUrl;
         });
 
+        this.updatePrice(card, button);
+
         this.querySelectorAll('[data-variant-url]').forEach((swatch) => {
           swatch.setAttribute('aria-pressed', String(swatch === button));
         });
+      }
+
+      updatePrice(card, button) {
+        const price = card?.querySelector('[data-card-variant-price] .price');
+        if (!price || !button.dataset.variantPrice) return;
+
+        const isOnSale = button.dataset.variantOnSale === 'true';
+        const regularPrice = price.querySelector('.price__regular .price-item--regular');
+        const salePrice = price.querySelector('.price__sale .price-item--sale');
+        const compareAtPrice = price.querySelector('.price__sale .price-item--regular');
+
+        price.classList.toggle('price--on-sale', isOnSale);
+        if (isOnSale) price.classList.remove('price--no-compare');
+        if (regularPrice) regularPrice.textContent = button.dataset.variantPrice;
+        if (salePrice) salePrice.textContent = button.dataset.variantPrice;
+        if (compareAtPrice && isOnSale) compareAtPrice.textContent = button.dataset.variantCompareAtPrice;
       }
     }
   );

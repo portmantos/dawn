@@ -35,6 +35,10 @@
       echo value.id
       echo '"'
     endcapture
+
+    assign swatch_variant = value.variant
+    assign swatch_price = swatch_variant.price
+    assign swatch_compare_at_price = swatch_variant.compare_at_price
   -%}
 
   {%- if picker_type == 'color' -%}
@@ -87,6 +91,18 @@
           {%- endif -%}
         </span>
         <span class="non-stop-color-pivot__name">{{ value }}</span>
+        {%- if swatch_variant != blank -%}
+          <span class="non-stop-color-pivot__price{% if swatch_compare_at_price > swatch_price %} is-sale{% endif %}">
+            <span class="non-stop-color-pivot__current-price">
+              {{- swatch_price | money_without_trailing_zeros -}}
+            </span>
+            {%- if swatch_compare_at_price > swatch_price -%}
+              <s class="non-stop-color-pivot__compare-price">
+                {{- swatch_compare_at_price | money_without_trailing_zeros -}}
+              </s>
+            {%- endif -%}
+          </span>
+        {%- endif -%}
         {%- if option_disabled -%}
           <span class="visually-hidden">{{ 'products.product.value_unavailable' | t: option_value: value }}</span>
         {%- endif -%}

@@ -242,6 +242,33 @@ body.non-stop-theme {
   box-shadow: inset 0 0 0 1px rgba(23, 26, 28, 0.18);
 }
 
+.non-stop-award-badge {
+  z-index: 4;
+  pointer-events: none;
+}
+
+.non-stop-award-badge img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0.3rem 0.7rem rgba(23, 26, 28, 0.16));
+}
+
+.non-stop-award-badge--card {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  width: 7.2rem;
+  max-width: 24%;
+}
+
+.non-stop-award-badge--gallery {
+  position: absolute;
+  top: 1.8rem;
+  left: 1.8rem;
+  width: 10rem;
+}
+
 .product-card-wrapper.is-variant-selected .media--hover-effect > img + img {
   opacity: 0 !important;
 }
@@ -896,7 +923,7 @@ body.non-stop-theme {
 
 .non-stop-color-pivot {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 6.4rem);
+  grid-template-columns: repeat(auto-fill, 7.6rem);
   gap: 0.8rem;
 }
 
@@ -904,6 +931,10 @@ body.non-stop-theme {
 .non-stop-size-pivot__item {
   position: relative;
   min-width: 0;
+}
+
+.non-stop-color-pivot__item {
+  width: 7.6rem;
 }
 
 .non-stop-variant-input {
@@ -917,11 +948,12 @@ body.non-stop-theme {
 }
 
 .non-stop-color-pivot__label {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  min-height: 8.8rem;
-  padding: 0.4rem;
+  display: grid;
+  grid-template-rows: 5rem 2.6rem 2.7rem;
+  gap: 0.3rem;
+  width: 7.6rem;
+  height: 11.5rem;
+  padding: 0.5rem;
   border: 1px solid transparent;
   background: var(--non-stop-sand);
   color: var(--non-stop-ink);
@@ -952,7 +984,9 @@ body.non-stop-theme {
 .non-stop-color-pivot__media {
   display: grid;
   place-items: center;
-  min-height: 5.8rem;
+  width: 100%;
+  height: 5rem;
+  min-height: 0;
   overflow: hidden;
   background: var(--non-stop-cream);
 }
@@ -960,14 +994,14 @@ body.non-stop-theme {
 .non-stop-color-pivot__image {
   display: block;
   width: 100%;
-  height: 5.8rem;
+  height: 5rem;
   object-fit: contain;
 }
 
 .non-stop-color-pivot__swatch {
   display: block;
-  width: 4.8rem;
-  height: 4.8rem;
+  width: 4.2rem;
+  height: 4.2rem;
   border-radius: 50%;
   background: var(--non-stop-swatch, var(--non-stop-ink-soft));
   box-shadow: inset 0 0 0 1px rgba(23, 26, 28, 0.16);
@@ -978,10 +1012,37 @@ body.non-stop-theme {
 }
 
 .non-stop-color-pivot__name {
-  padding: 0 0.2rem 0.2rem;
+  display: -webkit-box;
+  min-height: 2.4rem;
+  overflow: hidden;
+  padding: 0 0.1rem;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
   font-size: 1.1rem;
   line-height: 1.1;
   text-align: center;
+}
+
+.non-stop-color-pivot__price {
+  display: flex;
+  min-height: 2.5rem;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+  font-size: 1rem;
+  line-height: 1.05;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.non-stop-color-pivot__price.is-sale .non-stop-color-pivot__current-price {
+  color: var(--non-stop-sale);
+  font-weight: 700;
+}
+
+.non-stop-color-pivot__compare-price {
+  color: rgba(23, 26, 28, 0.58);
+  font-size: 0.9rem;
 }
 
 .non-stop-size-pivot {
