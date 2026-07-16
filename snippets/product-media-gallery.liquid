@@ -1,3 +1,10 @@
+{% doc %}
+  Renders a variant-aware product media gallery.
+
+  @param {product} product - The current product.
+  @param {section} section - The section that owns the gallery.
+{% enddoc %}
+
 {%- assign selected_variant = product.selected_or_first_available_variant -%}
 
 <media-gallery
@@ -21,17 +28,33 @@
         {%- if variant_gallery != blank -%}
           {%- assign primary_image = variant_gallery | first -%}
           {%- assign primary_alt = primary_image.alt | default: product.title -%}
-          <button class="non-stop-gallery__main" type="button" aria-label="{{ 'products.product.media.open_media' | t }}">
-            {{ primary_image | image_url: width: 1800 | image_tag: class: 'non-stop-gallery__main-image', loading: 'eager', alt: primary_alt }}
-          </button>
-          <div class="non-stop-gallery__thumbs" role="list">
+          <div class="non-stop-gallery__viewport">
+            <button class="non-stop-gallery__main" type="button" aria-label="{{ 'products.product.media.open_media' | t }}">
+              {{ primary_image | image_url: width: 1800 | image_tag: class: 'non-stop-gallery__main-image', loading: 'eager', alt: primary_alt }}
+            </button>
+            {%- if variant_gallery.size > 1 -%}
+              <button class="non-stop-gallery__arrow non-stop-gallery__arrow--previous" type="button" data-gallery-previous aria-label="{{ 'sections.slideshow.previous_slideshow' | t }}">
+                <span aria-hidden="true">&#8592;</span>
+              </button>
+              <button class="non-stop-gallery__arrow non-stop-gallery__arrow--next" type="button" data-gallery-next aria-label="{{ 'sections.slideshow.next_slideshow' | t }}">
+                <span aria-hidden="true">&#8594;</span>
+              </button>
+              <div class="non-stop-gallery__counter" aria-live="polite">
+                <span data-gallery-current>1</span><span aria-hidden="true"> / </span><span>{{ variant_gallery.size }}</span>
+              </div>
+            {%- endif -%}
+          </div>
+          <div class="non-stop-gallery__thumbs" role="list" aria-label="{{ 'products.product.media.gallery_viewer' | t }}: {{ variant.title | escape }}">
             {%- for image in variant_gallery -%}
               {%- assign image_alt = image.alt | default: product.title -%}
               <button
                 type="button"
                 class="non-stop-gallery__thumb{% if forloop.first %} is-active{% endif %}"
+                role="listitem"
                 data-gallery-image="{{ image | image_url: width: 1800 }}"
                 data-gallery-alt="{{ image_alt | escape }}"
+                data-gallery-index="{{ forloop.index0 }}"
+                aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
                 aria-label="{{ 'sections.slideshow.load_slide' | t }} {{ forloop.index }}"
               >
                 {{ image | image_url: width: 180 | image_tag: loading: 'lazy', alt: image_alt }}
@@ -39,15 +62,20 @@
             {%- endfor -%}
           </div>
         {%- elsif fallback_image != blank -%}
-          <button class="non-stop-gallery__main" type="button" aria-label="{{ 'products.product.media.open_media' | t }}">
-            {{ fallback_image | image_url: width: 1800 | image_tag: class: 'non-stop-gallery__main-image', loading: 'eager', alt: product.title }}
-          </button>
+          <div class="non-stop-gallery__viewport">
+            <button class="non-stop-gallery__main" type="button" aria-label="{{ 'products.product.media.open_media' | t }}">
+              {{ fallback_image | image_url: width: 1800 | image_tag: class: 'non-stop-gallery__main-image', loading: 'eager', alt: product.title }}
+            </button>
+          </div>
           <div class="non-stop-gallery__thumbs" role="list">
             <button
               type="button"
               class="non-stop-gallery__thumb is-active"
+              role="listitem"
               data-gallery-image="{{ fallback_image | image_url: width: 1800 }}"
               data-gallery-alt="{{ product.title | escape }}"
+              data-gallery-index="0"
+              aria-current="true"
               aria-label="{{ 'sections.slideshow.load_slide' | t }} 1"
             >
               {{ fallback_image | image_url: width: 180 | image_tag: loading: 'lazy', alt: product.title }}
