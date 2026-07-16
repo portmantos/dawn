@@ -8,25 +8,54 @@
         "color_scheme": "scheme-1"
       }
     },
-    "product-grid": {
+    "collection_nav": {
+      "type": "non-stop-collection-nav",
+      "blocks": {
+        "collection_one": {
+          "type": "collection_link",
+          "settings": {
+            "collection": "to-new-york",
+            "label": "",
+            "custom_url": ""
+          }
+        },
+        "collection_two": {
+          "type": "collection_link",
+          "settings": {
+            "collection": "new-york-elite",
+            "label": "",
+            "custom_url": ""
+          }
+        }
+      },
+      "block_order": ["collection_one", "collection_two"],
+      "settings": {
+        "heading": "Shop by collection",
+        "show_all_link": true,
+        "all_label": "All luggage",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "product_grid": {
       "type": "main-collection-product-grid",
       "settings": {
-        "products_per_page": 16,
-        "columns_desktop": 4,
-        "image_ratio": "adapt",
-        "show_secondary_image": false,
+        "products_per_page": 12,
+        "columns_desktop": 3,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
+        "quick_add": "none",
         "enable_filtering": true,
+        "filter_type": "drawer",
         "enable_sorting": true,
-        "columns_mobile": "2",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "padding_top": 24,
+        "padding_bottom": 72
       }
     }
   },
-  "order": [
-    "banner",
-    "product-grid"
-  ]
+  "order": ["banner", "collection_nav", "product_grid"]
 }

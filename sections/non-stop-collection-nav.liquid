@@ -1,0 +1,75 @@
+<section class="non-stop-collection-nav color-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <p class="non-stop-eyebrow">{{ section.settings.heading | escape }}</p>
+    {%- endif -%}
+    <nav aria-label="{{ section.settings.heading | default: 'Browse collections' | escape }}">
+      <ul class="non-stop-collection-nav__list" role="list">
+        {%- if section.settings.show_all_link -%}
+          <li>
+            <a
+              class="non-stop-pill{% if collection.handle == 'all' %} is-active{% endif %}"
+              href="{{ routes.all_products_collection_url }}"
+            >
+              {{ section.settings.all_label | escape }}
+            </a>
+          </li>
+        {%- endif -%}
+        {%- for block in section.blocks -%}
+          {%- assign nav_collection = block.settings.collection -%}
+          {%- if nav_collection != blank -%}
+            <li {{ block.shopify_attributes }}>
+              <a
+                class="non-stop-pill{% if collection.handle == nav_collection.handle %} is-active{% endif %}"
+                href="{{ nav_collection.url }}"
+              >
+                {{ block.settings.label | default: nav_collection.title | escape }}
+              </a>
+            </li>
+          {%- elsif block.settings.custom_url != blank -%}
+            <li {{ block.shopify_attributes }}>
+              <a class="non-stop-pill" href="{{ block.settings.custom_url }}">
+                {{ block.settings.label | escape }}
+              </a>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </nav>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Non-Stop collection nav",
+  "tag": "section",
+  "class": "section-non-stop-collection-nav",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Eyebrow", "default": "Shop by collection" },
+    { "type": "checkbox", "id": "show_all_link", "label": "Show all products link", "default": true },
+    { "type": "text", "id": "all_label", "label": "All products label", "default": "All luggage" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" }
+  ],
+  "blocks": [
+    {
+      "type": "collection_link",
+      "name": "Collection link",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "url", "id": "custom_url", "label": "Fallback link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Non-Stop collection nav",
+      "blocks": [
+        { "type": "collection_link" },
+        { "type": "collection_link" }
+      ]
+    }
+  ]
+}
+{% endschema %}

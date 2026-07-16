@@ -1,0 +1,92 @@
+{%- assign story_text = section.settings.text -%}
+{%- if story_text == blank -%}
+  {%- assign story_text = product.description -%}
+{%- endif -%}
+
+<section class="non-stop-pdp-story non-stop-pdp-story--{{ section.settings.image_position }} color-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="non-stop-pdp-story__grid">
+      <div class="non-stop-pdp-story__media">
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 1600 }}"
+            alt="{{ section.settings.image.alt | default: product.title | escape }}"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+            loading="lazy"
+          >
+        {%- else -%}
+          <div class="non-stop-pdp-story__placeholder" aria-hidden="true"><span>READY FOR THE MILES AHEAD</span></div>
+        {%- endif -%}
+      </div>
+      <div class="non-stop-pdp-story__content">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="non-stop-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        <h2>{{ section.settings.heading | escape }}</h2>
+        {%- if story_text != blank -%}
+          <div class="non-stop-pdp-story__description rte">{{ story_text }}</div>
+        {%- endif -%}
+        <ul class="non-stop-pdp-story__highlights" role="list">
+          {%- for block in section.blocks -%}
+            <li {{ block.shopify_attributes }}>
+              <span class="non-stop-pdp-story__mark" aria-hidden="true">+</span>
+              <div>
+                <h3>{{ block.settings.title | escape }}</h3>
+                {%- if block.settings.text != blank -%}
+                  <div class="rte">{{ block.settings.text }}</div>
+                {%- endif -%}
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Non-Stop product story",
+  "tag": "section",
+  "class": "section-non-stop-pdp-story",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Story image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why it travels well" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Made to keep moving." },
+    { "type": "richtext", "id": "text", "label": "Description", "info": "Leave blank to use the product description." },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" }
+  ],
+  "blocks": [
+    {
+      "type": "highlight",
+      "name": "Highlight",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Organized where it counts" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Smart storage keeps the essentials in reach and the rest in its place.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Non-Stop product story",
+      "blocks": [
+        { "type": "highlight" },
+        { "type": "highlight", "settings": { "title": "Comfort on the move", "text": "<p>Smooth-rolling wheels and balanced handles make every transfer easier.</p>" } },
+        { "type": "highlight", "settings": { "title": "Ready for repeat trips", "text": "<p>Durable materials and considered construction built for the next departure.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

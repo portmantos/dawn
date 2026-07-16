@@ -1,0 +1,55 @@
+<section class="non-stop-benefits color-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="non-stop-benefits__heading">
+        <h2>{{ section.settings.heading | escape }}</h2>
+      </div>
+    {%- endif -%}
+    <div class="non-stop-benefits__grid">
+      {%- for block in section.blocks -%}
+        <div class="non-stop-benefit" {{ block.shopify_attributes }}>
+          <span class="non-stop-benefit__number">0{{ forloop.index }}</span>
+          <div>
+            <h3>{{ block.settings.title | escape }}</h3>
+            {%- if block.settings.text != blank -%}
+              <div class="rte">{{ block.settings.text }}</div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Non-Stop benefits",
+  "tag": "section",
+  "class": "section-non-stop-benefits",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The non-stop promise" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-4" }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Built to last" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Dependable materials and thoughtful details for miles of use.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Non-Stop benefits",
+      "blocks": [
+        { "type": "benefit" },
+        { "type": "benefit", "settings": { "title": "Easy to live with", "text": "<p>Organized interiors and smooth movement keep every trip simple.</p>" } },
+        { "type": "benefit", "settings": { "title": "Ready for the next one", "text": "<p>Versatile pieces that move from the airport to wherever the road ends.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
