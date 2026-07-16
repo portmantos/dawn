@@ -2,9 +2,9 @@ class NonStopProductGallery {
   constructor(root) {
     this.root = root;
     this.variants = root.querySelectorAll('[data-variant-gallery]');
+    this.productInfo = root.closest('product-info');
     this.bindThumbnails();
     this.bindVariantFallback();
-    this.productInfo = root.closest('product-info');
     this.productInfo?.addEventListener('non-stop-variant-change', (event) => this.showVariant(event.detail?.variant?.id));
     this.unsubscribe = typeof subscribe === 'function' && typeof PUB_SUB_EVENTS !== 'undefined'
       ? subscribe(PUB_SUB_EVENTS.variantChange, (event) => this.showVariant(event?.data?.variant?.id))
@@ -12,9 +12,9 @@ class NonStopProductGallery {
   }
 
   bindVariantFallback() {
-    document.addEventListener('change', (event) => {
+    this.productInfo?.addEventListener('change', (event) => {
       const input = event.target.closest('.non-stop-variant-input:checked');
-      if (!input || !input.dataset.galleryVariantId || !this.root.contains(input)) return;
+      if (!input || !input.dataset.galleryVariantId) return;
       this.showVariant(input.dataset.galleryVariantId);
     });
   }
