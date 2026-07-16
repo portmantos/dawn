@@ -16,7 +16,7 @@
         "caption": {
           "type": "text",
           "settings": {
-            "text": "{{ product.metafields.descriptors.subtitle.value }}",
+            "text": "{{ product.metafields.custom.product_subtitle.value }}",
             "text_style": "subtitle"
           }
         },
@@ -68,15 +68,9 @@
             "content": "",
             "page": ""
           }
-        },
-        "share": {
-          "type": "share",
-          "settings": {
-            "share_label": "Share"
-          }
         }
       },
-      "block_order": ["vendor", "title", "caption", "price", "variant_picker", "quantity_selector", "buy_buttons", "description", "shipping", "dimensions", "care", "share"],
+      "block_order": ["vendor", "title", "caption", "price", "variant_picker", "quantity_selector", "buy_buttons", "description", "shipping", "dimensions", "care"],
       "settings": {
         "enable_sticky_info": true,
         "gallery_layout": "thumbnail_slider",

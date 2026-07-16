@@ -55,7 +55,15 @@
       >
       <label class="non-stop-color-pivot__label" for="{{ input_id }}">
         <span class="non-stop-color-pivot__media">
-          {%- if value.variant and value.variant.featured_image -%}
+          {%- assign variant_gallery = value.variant.metafields.custom.variant_gallery.value -%}
+          {%- assign variant_swatch_image = variant_gallery | first -%}
+          {%- if variant_swatch_image -%}
+            {{
+              variant_swatch_image
+              | image_url: width: 240
+              | image_tag: loading: 'lazy', class: 'non-stop-color-pivot__image', alt: value
+            }}
+          {%- elsif value.variant and value.variant.featured_image -%}
             {{
               value.variant.featured_image
               | image_url: width: 240
