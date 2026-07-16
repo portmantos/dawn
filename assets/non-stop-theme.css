@@ -581,7 +581,7 @@ body.non-stop-theme {
 }
 
 .non-stop-theme .product {
-  gap: 5.6rem;
+  gap: 2.4rem;
   align-items: start;
 }
 
@@ -594,28 +594,55 @@ body.non-stop-theme {
 }
 
 .non-stop-theme .product__info-container {
-  padding: 4rem;
+  max-width: none;
+  padding: 2.8rem 3rem;
   background: var(--non-stop-cream);
   border: 1px solid var(--non-stop-line);
 }
 
 .non-stop-theme .product__title h1 {
   margin: 0;
-  font-size: clamp(3.6rem, 5vw, 6.8rem);
-  line-height: 0.9;
+  font-size: clamp(2.8rem, 2.2vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.non-stop-theme .product__title {
+  margin-bottom: 0.8rem;
+}
+
+.non-stop-theme .product__info-container > * + * {
+  margin-top: 1.1rem;
+  margin-bottom: 1.1rem;
 }
 
 .non-stop-theme .product__text {
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
   color: var(--non-stop-ink-soft);
+  font-size: 1.25rem;
+  line-height: 1.4;
 }
 
 .non-stop-theme .product__info-container .price {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
+}
+
+.non-stop-theme .product__info-container .installment {
+  margin-top: 1.2rem;
+  margin-bottom: 1.6rem;
+  line-height: 1.35;
+}
+
+.non-stop-theme .product__info-container .product-form,
+.non-stop-theme .product__info-container .product-form__input {
+  margin-top: 1.6rem;
+  margin-bottom: 1.6rem;
 }
 
 .non-stop-theme .non-stop-option-group {
-  margin: 2.8rem 0 0;
-  padding: 2rem 0 0;
+  margin: 1.6rem 0 0;
+  padding: 1.4rem 0 0;
   border-top: 1px solid var(--non-stop-line);
 }
 
@@ -624,7 +651,7 @@ body.non-stop-theme {
   align-items: baseline;
   justify-content: space-between;
   gap: 1.2rem;
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.8rem;
   font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -641,7 +668,7 @@ body.non-stop-theme {
 
 .non-stop-color-pivot {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, 6.4rem);
   gap: 0.8rem;
 }
 
@@ -664,9 +691,9 @@ body.non-stop-theme {
 .non-stop-color-pivot__label {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
-  min-height: 12.8rem;
-  padding: 0.6rem;
+  gap: 0.4rem;
+  min-height: 8.8rem;
+  padding: 0.4rem;
   border: 1px solid transparent;
   background: var(--non-stop-sand);
   color: var(--non-stop-ink);
@@ -697,7 +724,7 @@ body.non-stop-theme {
 .non-stop-color-pivot__media {
   display: grid;
   place-items: center;
-  min-height: 8.8rem;
+  min-height: 5.8rem;
   overflow: hidden;
   background: var(--non-stop-cream);
 }
@@ -705,7 +732,7 @@ body.non-stop-theme {
 .non-stop-color-pivot__image {
   display: block;
   width: 100%;
-  height: 8.8rem;
+  height: 5.8rem;
   object-fit: contain;
 }
 
@@ -723,10 +750,10 @@ body.non-stop-theme {
 }
 
 .non-stop-color-pivot__name {
-  padding: 0 0.4rem 0.3rem;
-  font-size: 1.2rem;
+  padding: 0 0.2rem 0.2rem;
+  font-size: 1.1rem;
   line-height: 1.1;
-  text-align: left;
+  text-align: center;
 }
 
 .non-stop-size-pivot {
@@ -782,7 +809,7 @@ body.non-stop-theme {
 
 .non-stop-theme .product-form__submit {
   width: 100%;
-  min-height: 5.4rem;
+  min-height: 4.8rem;
   background: var(--non-stop-ink);
   color: #fff;
 }
@@ -895,8 +922,25 @@ body.non-stop-theme {
 }
 
 @media screen and (min-width: 750px) {
+  .non-stop-theme .product__info-wrapper {
+    padding-left: 0;
+  }
+
   .non-stop-theme .product--large:not(.product--no-media) .product__media-wrapper {
     max-width: none;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .non-stop-theme .product--large:not(.product--no-media) .product__media-wrapper {
+    width: calc(62% - 1.2rem);
+    max-width: calc(62% - 1.2rem);
+  }
+
+  .non-stop-theme .product--large:not(.product--no-media) .product__info-wrapper {
+    width: calc(38% - 1.2rem);
+    max-width: calc(38% - 1.2rem);
+    padding-left: 0;
   }
 }
 
@@ -993,23 +1037,23 @@ body.non-stop-theme {
   }
 
   .non-stop-theme .product__info-container {
-    padding: 2.4rem 1.6rem;
+    padding: 2rem 1.6rem;
     border-right: 0;
     border-left: 0;
   }
 
   .non-stop-color-pivot {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .non-stop-color-pivot__label {
-    min-height: 11.2rem;
+    min-height: 8.8rem;
   }
 
   .non-stop-color-pivot__media,
   .non-stop-color-pivot__image {
-    min-height: 7.4rem;
-    height: 7.4rem;
+    min-height: 5.8rem;
+    height: 5.8rem;
   }
 
   .non-stop-size-pivot {
