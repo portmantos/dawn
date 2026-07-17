@@ -58,6 +58,14 @@
   {%- liquid
     assign first_3d_model = product.media | where: 'media_type', 'model' | first
     assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src'
+    assign feature_badge_block = nil
+
+    for section_block in section.blocks
+      if section_block.type == 'feature_badges'
+        assign feature_badge_block = section_block
+        break
+      endif
+    endfor
   -%}
   {%- if first_3d_model -%}
     {{ 'component-product-model.css' | asset_url | stylesheet_tag }}
@@ -82,6 +90,12 @@
       <div class="grid__item product__media-wrapper">
         {% render 'product-media-gallery' %}
         {% render 'non-stop-award-badge', product: product, context: 'gallery' %}
+        {% render 'non-stop-pdp-support',
+          product: product,
+          feature_block: feature_badge_block,
+          context: 'media',
+          show_block_attributes: true
+        %}
       </div>
       <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         <section
@@ -474,9 +488,6 @@
                   section_id: section.id,
                   show_pickup_availability: true
                 -%}
-                {% render 'non-stop-service-promises' %}
-              {%- when 'feature_badges' -%}
-                {% render 'non-stop-feature-badges', product: product, block: block %}
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
                   <div class="rating-wrapper">
@@ -675,6 +686,12 @@
           </a>
         </section>
       </div>
+      {% render 'non-stop-pdp-support',
+        product: product,
+        feature_block: feature_badge_block,
+        context: 'mobile',
+        show_block_attributes: false
+      %}
     </div>
 
     <div class="non-stop-pdp__lower">

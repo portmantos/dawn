@@ -1,0 +1,22 @@
+{% doc %}
+  Renders the product service promises and travel features as a shared support panel.
+
+  @param {product} product - Product whose metafields provide travel features.
+  @param {object} [feature_block] - Product feature block and settings.
+  @param {string} context - Responsive placement context.
+  @param {boolean} [show_block_attributes] - Whether to output theme editor attributes.
+
+  @example
+  {% render 'non-stop-pdp-support', product: product, feature_block: block, context: 'media' %}
+{% enddoc %}
+<div class="non-stop-pdp-support non-stop-pdp-support--{{ context | handleize }}">
+  {% render 'non-stop-service-promises' %}
+  {%- if feature_block != blank -%}
+    {% render 'non-stop-feature-badges',
+      product: product,
+      block: feature_block,
+      context: 'support',
+      show_block_attributes: show_block_attributes
+    %}
+  {%- endif -%}
+</div>

@@ -3,6 +3,8 @@
 
   @param {product} product - Product whose metafields provide the feature data.
   @param {object} block - Product information block settings and editor attributes.
+  @param {string} [context] - Optional placement context.
+  @param {boolean} [show_block_attributes] - Whether to output theme editor attributes.
 
   @example
   {% render 'non-stop-feature-badges', product: product, block: block %}
@@ -14,6 +16,12 @@
   assign badge_count = 0
   assign is_power_product = false
   assign has_features = false
+  assign context_class = context | handleize
+  assign render_block_attributes = true
+
+  if show_block_attributes == false
+    assign render_block_attributes = false
+  endif
 
   if luggage_type contains 'power bank'
     assign is_power_product = true
@@ -25,7 +33,7 @@
 -%}
 
 {%- if has_features -%}
-  <div class="non-stop-feature-badges" {{ block.shopify_attributes }}>
+  <div class="non-stop-feature-badges{% if context_class != blank %} non-stop-feature-badges--{{ context_class }}{% endif %}"{% if render_block_attributes %} {{ block.shopify_attributes }}{% endif %}>
     <p class="non-stop-feature-badges__eyebrow">{{ 'products.product.feature_highlights' | t }}</p>
     <ul class="non-stop-feature-badges__list" role="list">
       {%- if luggage_type contains 'set' and badge_count < max_items -%}
