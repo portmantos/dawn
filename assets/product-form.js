@@ -158,12 +158,15 @@ if (!customElements.get('product-form')) {
         const addOnVariantId = this.addOnCheckbox.dataset.variantId;
         if (!productVariantId || !addOnVariantId) return null;
 
-        const quantity = Math.max(parseInt(formData.get('quantity') || '1', 10), 1);
+        const quantity = this.getProductQuantity(formData);
+        const addOnQuantityRatio = Math.max(parseInt(this.addOnCheckbox.dataset.quantityRatio || '1', 10), 1);
+        const addOnQuantity = quantity * addOnQuantityRatio;
         const bundleId = `non-stop-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
         const parentProperties = this.getLineItemProperties(formData);
 
         parentProperties._non_stop_bundle_id = bundleId;
         parentProperties._non_stop_add_on_variant = addOnVariantId;
+        parentProperties._non_stop_quantity_ratio = String(addOnQuantityRatio);
 
         const productItem = {
           id: Number(productVariantId),
@@ -179,12 +182,13 @@ if (!customElements.get('product-form')) {
             productItem,
             {
               id: Number(addOnVariantId),
-              quantity,
+              quantity: addOnQuantity,
               properties: {
                 _non_stop_add_on: 'true',
                 _non_stop_bundle_id: bundleId,
                 _non_stop_parent_variant: String(productVariantId),
                 _non_stop_offer: this.addOnCheckbox.dataset.offerHandle || '',
+                _non_stop_quantity_ratio: String(addOnQuantityRatio),
               },
             },
           ],
@@ -196,6 +200,13 @@ if (!customElements.get('product-form')) {
         }
 
         return request;
+      }
+
+      getProductQuantity(formData) {
+        const quantityControl = this.form.elements.namedItem('quantity');
+        const quantityValue = quantityControl?.value || formData.get('quantity') || '1';
+
+        return Math.max(parseInt(quantityValue, 10) || 1, 1);
       }
 
       getLineItemProperties(formData) {

@@ -31,6 +31,7 @@
         data-non-stop-add-on
         data-variant-id="{{ add_on_variant.id }}"
         data-offer-handle="{{ offer.system.handle | escape }}"
+        data-quantity-ratio="1"
         {% unless add_on_variant.available %}
           disabled
         {% endunless %}

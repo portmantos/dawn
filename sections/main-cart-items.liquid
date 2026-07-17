@@ -82,6 +82,7 @@
                   {%- liquid
                     assign non_stop_bundle_id = item.properties['_non_stop_bundle_id']
                     assign non_stop_is_add_on = item.properties['_non_stop_add_on']
+                    assign non_stop_quantity_ratio = item.properties['_non_stop_quantity_ratio'] | default: 1
                   -%}
                   <tr
                     class="cart-item{% if item.parent_relationship.parent != null or non_stop_is_add_on == 'true' %} cart-item__nested-line{% endif %}{% if non_stop_is_add_on == 'true' %} cart-item--non-stop-addon{% endif %}"
@@ -89,6 +90,7 @@
                     data-line-key="{{ item.key | escape }}"
                     {% if non_stop_bundle_id != blank %}
                       data-non-stop-bundle-id="{{ non_stop_bundle_id | escape }}"
+                      data-non-stop-quantity-ratio="{{ non_stop_quantity_ratio | escape }}"
                     {% endif %}
                     {% if non_stop_is_add_on == 'true' %}
                       data-non-stop-add-on="true"
@@ -257,7 +259,7 @@
                                 class="quantity__button"
                                 name="minus"
                                 type="button"
-                                {% if can_update_quantity == false %}
+                                {% if can_update_quantity == false or non_stop_is_add_on == 'true' %}
                                   disabled
                                 {% endif %}
                               >
@@ -286,7 +288,7 @@
                                 aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
                                 id="Quantity-{{ item.index | plus: 1 }}"
                                 data-index="{{ item.index | plus: 1 }}"
-                                {% if can_update_quantity == false %}
+                                {% if can_update_quantity == false or non_stop_is_add_on == 'true' %}
                                   disabled
                                 {% endif %}
                               >
@@ -294,7 +296,7 @@
                                 class="quantity__button"
                                 name="plus"
                                 type="button"
-                                {% if can_update_quantity == false %}
+                                {% if can_update_quantity == false or non_stop_is_add_on == 'true' %}
                                   disabled
                                 {% endif %}
                               >

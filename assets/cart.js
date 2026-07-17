@@ -156,6 +156,10 @@ class CartItems extends HTMLElement {
             (item) => item.dataset.nonStopBundleId === bundleId
           )
         : null;
+    const addOnQuantityRatio = Math.max(
+      parseInt(linkedAddOnLine?.dataset.nonStopQuantityRatio || '1', 10) || 1,
+      1
+    );
 
     this.enableLoading(line);
 
@@ -168,7 +172,7 @@ class CartItems extends HTMLElement {
     if (linkedAddOnLine && sourceLineItem.dataset.lineKey && linkedAddOnLine.dataset.lineKey) {
       requestData.updates = {
         [sourceLineItem.dataset.lineKey]: quantity,
-        [linkedAddOnLine.dataset.lineKey]: quantity,
+        [linkedAddOnLine.dataset.lineKey]: quantity * addOnQuantityRatio,
       };
       updateUrl = routes.cart_update_url;
     } else {
