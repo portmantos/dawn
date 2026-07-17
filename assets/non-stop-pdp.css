@@ -1,5 +1,5 @@
 .non-stop-pdp {
-  align-items: flex-start;
+  align-items: stretch;
   column-gap: 3.2rem;
 }
 
@@ -15,13 +15,17 @@
 
 .non-stop-pdp .product__media-wrapper {
   flex-direction: column;
-  align-self: flex-start;
+  align-self: stretch;
+}
+
+.non-stop-pdp .product__info-wrapper {
+  align-self: stretch;
 }
 
 .non-stop-pdp .product__info-container {
   width: 100%;
   max-width: none;
-  min-height: 0;
+  min-height: 100%;
   padding: clamp(2rem, 2.5vw, 3.2rem);
   border: .1rem solid rgba(var(--color-foreground), .18);
   background: rgb(var(--color-background));
@@ -29,7 +33,7 @@
 
 .non-stop-pdp .product__column-sticky {
   top: 2rem;
-  align-self: flex-start;
+  align-self: stretch;
 }
 
 .non-stop-pdp .product__text {
@@ -65,21 +69,26 @@
 
 .non-stop-pdp .price__badge-sale {
   display: inline-flex;
+  box-sizing: border-box;
+  height: 2.6rem;
   align-items: center;
   justify-content: center;
-  min-height: 2.6rem;
-  padding: 0 1rem;
+  min-height: 0;
+  padding: .15rem 1rem 0;
   border-radius: 999px;
   line-height: 1;
+  vertical-align: middle;
 }
 
 .non-stop-pdp .non-stop-discount-badge {
   display: inline-flex;
+  box-sizing: border-box;
+  height: 2.6rem;
   align-items: center;
   justify-content: center;
-  min-height: 2.6rem;
+  min-height: 0;
   margin-left: .8rem;
-  padding: 0 1rem;
+  padding: .15rem 1rem 0;
   border-radius: 999px;
   background: var(--non-stop-sale);
   color: #fff;
@@ -120,15 +129,15 @@
 
 .non-stop-pdp .non-stop-color-pivot__label {
   width: 7.6rem;
-  height: 11.5rem;
-  padding: .5rem;
+  height: 10.4rem;
+  padding: .5rem .5rem .8rem;
   border-color: rgba(var(--color-foreground), .14);
   background: rgb(var(--color-background));
 }
 
 .non-stop-pdp .non-stop-color-pivot__media {
   width: 100%;
-  height: 5rem;
+  height: 5.8rem;
   min-height: 0;
   aspect-ratio: 1;
   background: transparent;
@@ -143,21 +152,30 @@
 }
 
 .non-stop-pdp .non-stop-color-pivot__swatch {
-  width: 4.2rem;
-  height: 4.2rem;
-  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
   background: var(--non-stop-swatch, #8b8b8b);
   box-shadow: inset 0 0 0 .1rem rgba(0, 0, 0, .18);
 }
 
-.non-stop-pdp .non-stop-color-pivot__name {
-  font-size: 1rem;
+.non-stop-pdp .non-stop-color-pivot__price {
+  min-height: 2.6rem;
+  padding: .45rem .2rem .2rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
 }
 
 .non-stop-gallery {
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.non-stop-pdp .non-stop-gallery {
+  flex: 0 0 auto;
+  height: auto;
 }
 
 .non-stop-gallery__stage {
@@ -434,6 +452,12 @@
   background: rgb(var(--color-background));
 }
 
+.non-stop-pdp-support--media {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
 .non-stop-pdp-support .non-stop-service-promises {
   margin: 0;
   padding: 1.5rem 2rem;
@@ -442,9 +466,150 @@
 }
 
 .non-stop-pdp-support .non-stop-feature-badges {
+  flex: 1 1 auto;
   margin: 0;
   padding: 2rem;
   border-top: 0;
+}
+
+.non-stop-product-information {
+  padding: clamp(2.4rem, 4vw, 4.8rem);
+  border: .1rem solid rgba(var(--color-foreground), .14);
+  background: rgb(var(--color-background));
+}
+
+.non-stop-product-information__header {
+  margin-bottom: 2.4rem;
+}
+
+.non-stop-product-information__header h2 {
+  margin: 0;
+  font-size: clamp(2.4rem, 3vw, 3.6rem);
+  letter-spacing: -.03em;
+}
+
+.non-stop-product-information__columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2rem, 4vw, 4rem);
+}
+
+.non-stop-product-information__column {
+  display: grid;
+  align-content: start;
+  gap: 1.6rem;
+}
+
+.non-stop-product-information__group {
+  border: .1rem solid rgba(var(--color-foreground), .16);
+}
+
+.non-stop-product-information__group summary {
+  display: flex;
+  min-height: 5.2rem;
+  padding: 1.2rem 1.6rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+  background: #f3f4f4;
+  cursor: pointer;
+  list-style: none;
+}
+
+.non-stop-product-information__group summary::-webkit-details-marker {
+  display: none;
+}
+
+.non-stop-product-information__group summary h3 {
+  margin: 0;
+  font-size: 1.65rem;
+  font-weight: 600;
+  letter-spacing: -.01em;
+}
+
+.non-stop-product-information__group summary .icon-caret {
+  width: 1.4rem;
+  transition: transform 180ms ease;
+}
+
+.non-stop-product-information__group[open] summary .icon-caret {
+  transform: rotate(180deg);
+}
+
+.non-stop-product-information__table {
+  margin: 0;
+  padding: 0 1.6rem;
+}
+
+.non-stop-product-information__table > div {
+  display: grid;
+  grid-template-columns: minmax(12rem, .9fr) minmax(0, 1.1fr);
+  gap: 1.6rem;
+  padding: 1rem 0;
+  border-bottom: .1rem solid rgba(var(--color-foreground), .14);
+}
+
+.non-stop-product-information__table > div:last-child {
+  border-bottom: 0;
+}
+
+.non-stop-product-information__table dt {
+  color: rgba(var(--color-foreground), .68);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.non-stop-product-information__table dd {
+  margin: 0;
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+
+.non-stop-product-information__list {
+  display: grid;
+  margin: 0;
+  padding: .4rem 1.6rem;
+  list-style: none;
+}
+
+.non-stop-product-information__list li {
+  position: relative;
+  padding: 1rem 0 1rem 2rem;
+  border-bottom: .1rem solid rgba(var(--color-foreground), .14);
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+
+.non-stop-product-information__list li:last-child {
+  border-bottom: 0;
+}
+
+.non-stop-product-information__list li::before {
+  position: absolute;
+  top: 1.15rem;
+  left: .2rem;
+  content: '✓';
+  color: rgba(var(--color-foreground), .64);
+  font-size: 1.1rem;
+}
+
+.non-stop-product-information__care {
+  padding: 1.4rem 1.6rem 1.6rem;
+  border-top: .1rem solid rgba(var(--color-foreground), .14);
+}
+
+.non-stop-product-information__care h4 {
+  margin: 0 0 .6rem;
+  font-size: 1.25rem;
+}
+
+.non-stop-product-information__care .metafield-rich_text_field,
+.non-stop-product-information__care p {
+  margin: 0;
+  color: rgba(var(--color-foreground), .72);
+  font-size: 1.25rem;
+  line-height: 1.5;
 }
 
 .non-stop-pdp-support .non-stop-feature-badges__eyebrow {
@@ -854,6 +1019,10 @@
 
   .non-stop-product-details__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .non-stop-product-information__columns {
+    grid-template-columns: 1fr;
   }
 }
 

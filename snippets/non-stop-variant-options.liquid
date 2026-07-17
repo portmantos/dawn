@@ -90,7 +90,7 @@
             <span class="non-stop-color-pivot__swatch non-stop-color-pivot__swatch--fallback"></span>
           {%- endif -%}
         </span>
-        <span class="non-stop-color-pivot__name">{{ value }}</span>
+        <span class="visually-hidden">{{ 'products.product.view_color' | t: color: value }}</span>
         {%- if swatch_variant != blank -%}
           <span class="non-stop-color-pivot__price{% if swatch_compare_at_price > swatch_price %} is-sale{% endif %}">
             <span class="non-stop-color-pivot__current-price">
