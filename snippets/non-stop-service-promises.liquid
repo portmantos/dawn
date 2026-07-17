@@ -1,0 +1,20 @@
+{% doc %}
+  Renders compact storefront service promises below the product purchase controls.
+
+  @example
+  {% render 'non-stop-service-promises' %}
+{% enddoc %}
+<ul class="non-stop-service-promises" role="list">
+  <li class="non-stop-service-promises__item">
+    {% render 'non-stop-travel-icon', name: 'shipping' %}
+    <span>{{ 'products.product.free_shipping' | t }}</span>
+  </li>
+  <li class="non-stop-service-promises__item">
+    {% render 'non-stop-travel-icon', name: 'returns' %}
+    <span>{{ 'products.product.returns_30_days' | t }}</span>
+  </li>
+  <li class="non-stop-service-promises__item">
+    {% render 'non-stop-travel-icon', name: 'warranty' %}
+    <span>{{ 'products.product.warranty_3_years' | t }}</span>
+  </li>
+</ul>

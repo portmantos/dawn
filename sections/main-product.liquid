@@ -474,6 +474,7 @@
                   section_id: section.id,
                   show_pickup_availability: true
                 -%}
+                {% render 'non-stop-service-promises' %}
               {%- when 'feature_badges' -%}
                 {% render 'non-stop-feature-badges', product: product, block: block %}
               {%- when 'rating' -%}

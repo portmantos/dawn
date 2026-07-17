@@ -1,0 +1,77 @@
+{% doc %}
+  Renders a lightweight Non-Stop travel or service icon.
+
+  @param {string} name - Icon name.
+  @param {string} [class] - Optional wrapper class.
+
+  @example
+  {% render 'non-stop-travel-icon', name: 'spinner', class: 'feature-icon' %}
+{% enddoc %}
+<span class="non-stop-travel-icon {{ class | escape }}" aria-hidden="true">
+  {%- case name -%}
+    {%- when 'luggage-set' -%}
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13.5 7.5V4.8c0-.9.7-1.6 1.6-1.6h2c.9 0 1.6.7 1.6 1.6v2.7M11.2 9.2h9.6c1.1 0 2 .9 2 2v14.1c0 1.1-.9 2-2 2h-9.6c-1.1 0-2-.9-2-2V11.2c0-1.1.9-2 2-2Z"/>
+        <path d="M13 12.5v11.2M19 12.5v11.2M12.1 29v-1.7M19.9 29v-1.7M5.2 13.2h4M22.8 13.2h4M5.6 13.2c-.8 0-1.4.6-1.4 1.4v10.1c0 .8.6 1.4 1.4 1.4h3.6M26.4 13.2c.8 0 1.4.6 1.4 1.4v10.1c0 .8-.6 1.4-1.4 1.4h-3.6M6.3 27.7v-1.6M25.7 27.7v-1.6"/>
+      </svg>
+    {%- when 'carry-on' -%}
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 9.2h18M9.5 9.2v13.6c0 1.2 1 2.2 2.2 2.2h8.6c1.2 0 2.2-1 2.2-2.2V9.2M12.5 9.2V6.1c0-1 .8-1.8 1.8-1.8h3.4c1 0 1.8.8 1.8 1.8v3.1M13 13.2h6M13 16.7h6M12.3 27.4V25M19.7 27.4V25"/>
+        <path d="M4.3 27.8h23.4M4.3 5.2c2.7-1.7 6.6-2.7 11.7-2.7s9 1 11.7 2.7"/>
+      </svg>
+    {%- when 'checked' -%}
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.5 7V4.8c0-1 .8-1.8 1.8-1.8h3.4c1 0 1.8.8 1.8 1.8V7M9 8.8h14c1.1 0 2 .9 2 2v14.5c0 1.1-.9 2-2 2H9c-1.1 0-2-.9-2-2V10.8c0-1.1.9-2 2-2ZM11.5 12.3v11.2M20.5 12.3v11.2M11 29v-1.7M21 29v-1.7"/>
+        <path d="m21.8 15.2 5.7-2.8 1.6 3.2-5.7 2.8-1.6-3.2Z"/>
+      </svg>
+    {%- when 'power-bank' -%}
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="3.5" width="16" height="25" rx="3"/>
+        <path d="M13 7h6M17.7 11.2l-5.2 7h3.8l-2 5.6 5.2-7h-3.8l2-5.6ZM12 26h8"/>
+      </svg>
+    {%- when 'tsa-lock' -%}
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10.5 13V9.5a5.5 5.5 0 0 1 11 0V13M8.5 13h15c1.1 0 2 .9 2 2v11c0 1.1-.9 2-2 2h-15c-1.1 0-2-.9-2-2V15c0-1.1.9-2 2-2Z"/>
+        <circle cx="16" cy="19" r="1.8"/>
+        <path d="M16 20.8v3.5"/>
+      </svg>
+    {%- when 'packing-cubes' -%}
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3.5" y="7" width="17" height="17" rx="2"/>
+        <path d="M7 7v17M3.5 11h17M10 10h7M22.5 12H27c.8 0 1.5.7 1.5 1.5V27c0 .8-.7 1.5-1.5 1.5H13.5c-.8 0-1.5-.7-1.5-1.5v-1M23.8 12v16.5M12 16h16.5"/>
+      </svg>
+    {%- when 'expandable' -%}
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.5 7V4.8c0-1 .8-1.8 1.8-1.8h3.4c1 0 1.8.8 1.8 1.8V7M10 8.5h12c1.1 0 2 .9 2 2v15c0 1.1-.9 2-2 2H10c-1.1 0-2-.9-2-2v-15c0-1.1.9-2 2-2ZM13 8.5v19M19 8.5v19"/>
+        <path d="M5.3 14.2 2.5 17l2.8 2.8M2.8 17h5.1M26.7 14.2l2.8 2.8-2.8 2.8M29.2 17h-5.1"/>
+      </svg>
+    {%- when 'usb' -%}
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 28V10M16 10l-4 4M16 10l4 4M16 10V4M13.5 6.5 16 4l2.5 2.5M16 19h-5.5c-1.4 0-2.5-1.1-2.5-2.5V14M8 14l-2-2m2 2 2-2M16 23h5.5c1.4 0 2.5-1.1 2.5-2.5V18"/>
+        <circle cx="24" cy="16" r="2"/>
+      </svg>
+    {%- when 'spinner' -%}
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.5 7V4.8c0-1 .8-1.8 1.8-1.8h3.4c1 0 1.8.8 1.8 1.8V7M9 8.5h14c1.1 0 2 .9 2 2v12.8c0 1.1-.9 2-2 2H9c-1.1 0-2-.9-2-2V10.5c0-1.1.9-2 2-2ZM12 12v9.5M20 12v9.5"/>
+        <path d="M8.3 28.2a3.5 3.5 0 0 0 5.4 0M18.3 28.2a3.5 3.5 0 0 0 5.4 0M9 29.3l-.8-1.8 2-.5M23 29.3l.8-1.8-2-.5"/>
+      </svg>
+    {%- when 'shipping' -%}
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.5 8V5.5c0-1 .8-1.8 1.8-1.8h3.4c1 0 1.8.8 1.8 1.8V8M9 9.5h14c1.1 0 2 .9 2 2v13c0 1.1-.9 2-2 2H9c-1.1 0-2-.9-2-2v-13c0-1.1.9-2 2-2ZM12 13v10M20 13v10M11.5 29v-2.5M20.5 29v-2.5M3 13h3M1.5 17h4.5M3 21h3"/>
+      </svg>
+    {%- when 'returns' -%}
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.5 9V6.5c0-1 .8-1.8 1.8-1.8h3.4c1 0 1.8.8 1.8 1.8V9M10 10.5h12c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H10c-1.1 0-2-.9-2-2v-12c0-1.1.9-2 2-2ZM13 14v9M19 14v9"/>
+        <path d="M8.2 26.2A11.5 11.5 0 0 1 5.5 10M5.5 10 2.8 12.7M5.5 10 8.2 12.7"/>
+      </svg>
+    {%- when 'warranty' -%}
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 3.2 26 7v7.5c0 6.3-4 11.3-10 14.3-6-3-10-8-10-14.3V7l10-3.8Z"/>
+        <path d="m11.5 16 3 3 6-7"/>
+      </svg>
+    {%- else -%}
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.5 7V4.8c0-1 .8-1.8 1.8-1.8h3.4c1 0 1.8.8 1.8 1.8V7M9 8.5h14c1.1 0 2 .9 2 2v15c0 1.1-.9 2-2 2H9c-1.1 0-2-.9-2-2v-15c0-1.1.9-2 2-2ZM12.5 12v12M19.5 12v12M11.5 29v-1.5M20.5 29v-1.5"/>
+      </svg>
+  {%- endcase -%}
+</span>

@@ -373,6 +373,22 @@
     }
   },
   "sections": {
+    "non_stop_benefits": {
+      "name": "Non-Stop benefits",
+      "heading_label": "Heading",
+      "heading_default": "The non-stop promise",
+      "color_scheme_label": "Color scheme",
+      "block_name": "Benefit",
+      "icon_label": "Icon",
+      "shipping_icon": "Free shipping",
+      "returns_icon": "Returns",
+      "warranty_icon": "Warranty",
+      "suitcase_icon": "Suitcase",
+      "title_label": "Title",
+      "title_default": "Built to last",
+      "text_label": "Text",
+      "text_default": "<p>Dependable materials and thoughtful details for miles of use.</p>"
+    },
     "all": {
       "animation": {
         "content": "Animations",

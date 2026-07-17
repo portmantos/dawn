@@ -162,22 +162,25 @@
         "shipping": {
           "type": "benefit",
           "settings": {
+            "icon": "shipping",
             "title": "Free shipping",
-            "text": "<p>Get your next trip moving with straightforward delivery.</p>"
+            "text": "<p>Complimentary standard shipping on every luggage order.</p>"
           }
         },
         "returns": {
           "type": "benefit",
           "settings": {
-            "title": "Simple returns",
-            "text": "<p>Take the time to make sure the piece is right for you.</p>"
+            "icon": "returns",
+            "title": "30-day returns",
+            "text": "<p>Make sure the piece is right for you with a 30-day return window.</p>"
           }
         },
         "support": {
           "type": "benefit",
           "settings": {
-            "title": "Here when you need us",
-            "text": "<p>Questions before or after your trip? We’re here to help.</p>"
+            "icon": "warranty",
+            "title": "3-year warranty",
+            "text": "<p>Travel with coverage against manufacturing defects for three years.</p>"
           }
         }
       },
