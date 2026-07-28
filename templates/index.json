@@ -182,6 +182,46 @@
         "padding_bottom": 56
       }
     },
+    "non_stop_pdp_story_8Y9NKt": {
+      "type": "non-stop-pdp-story",
+      "blocks": {
+        "highlight_9b6kka": {
+          "type": "highlight",
+          "settings": {
+            "title": "Thoughtful Design",
+            "text": "<p>Every curve, pocket, and handle is designed with your comfort and convenience in mind. We obsess over the details so you can focus on the adventure.</p>"
+          }
+        },
+        "highlight_mtaTFU": {
+          "type": "highlight",
+          "settings": {
+            "title": "Built to Last",
+            "text": "<p>Premium materials and expert craftsmanship mean your nonstop luggage will be ready for countless journeys. Backed by our 3-year warranty.</p>"
+          }
+        },
+        "highlight_MhAdrD": {
+          "type": "highlight",
+          "settings": {
+            "title": "Travel Smarter",
+            "text": "<p>Intuitive organization, smooth-rolling wheels, and balanced handles make every trip easier. Travel the way you want to travel.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "highlight_9b6kka",
+        "highlight_mtaTFU",
+        "highlight_MhAdrD"
+      ],
+      "name": "Non-Stop product story",
+      "settings": {
+        "image": "shopify://shop_images/image_9.png",
+        "eyebrow": "Why nonstop?",
+        "heading": "Engineered for the journey.",
+        "text": "",
+        "image_position": "left",
+        "color_scheme": "scheme-2"
+      }
+    },
     "image_with_text_AC9VBA": {
       "type": "image-with-text",
       "blocks": {
@@ -285,46 +325,6 @@
         "swipe_on_mobile": false,
         "padding_top": 36,
         "padding_bottom": 36
-      }
-    },
-    "non_stop_pdp_story_8Y9NKt": {
-      "type": "non-stop-pdp-story",
-      "blocks": {
-        "highlight_9b6kka": {
-          "type": "highlight",
-          "settings": {
-            "title": "Thoughtful Design",
-            "text": "<p>Every curve, pocket, and handle is designed with your comfort and convenience in mind. We obsess over the details so you can focus on the adventure.</p>"
-          }
-        },
-        "highlight_mtaTFU": {
-          "type": "highlight",
-          "settings": {
-            "title": "Built to Last",
-            "text": "<p>Premium materials and expert craftsmanship mean your nonstop luggage will be ready for countless journeys. Backed by our 3-year warranty.</p>"
-          }
-        },
-        "highlight_MhAdrD": {
-          "type": "highlight",
-          "settings": {
-            "title": "Travel Smarter",
-            "text": "<p>Intuitive organization, smooth-rolling wheels, and balanced handles make every trip easier. Travel the way you want to travel.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "highlight_9b6kka",
-        "highlight_mtaTFU",
-        "highlight_MhAdrD"
-      ],
-      "name": "Non-Stop product story",
-      "settings": {
-        "image": "shopify://shop_images/image_9.png",
-        "eyebrow": "Why nonstop?",
-        "heading": "Engineered for the journey.",
-        "text": "",
-        "image_position": "left",
-        "color_scheme": "scheme-2"
       }
     },
     "non_stop_benefits_Y3f78V": {
@@ -595,10 +595,10 @@
     "rich_text",
     "rich_text_xHirVc",
     "featured_collection",
+    "non_stop_pdp_story_8Y9NKt",
     "image_with_text_AC9VBA",
     "video",
     "collection_list_YnPiVh",
-    "non_stop_pdp_story_8Y9NKt",
     "non_stop_benefits_Y3f78V",
     "multicolumn_cz8W64",
     "collage_jTXG9J",
