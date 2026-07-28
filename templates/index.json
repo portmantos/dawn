@@ -246,45 +246,6 @@
         "padding_bottom": 36
       }
     },
-    "non_stop_benefits_Y3f78V": {
-      "type": "non-stop-benefits",
-      "blocks": {
-        "benefit_FQBq3y": {
-          "type": "benefit",
-          "settings": {
-            "icon": "shipping",
-            "title": "Built to last",
-            "text": ""
-          }
-        },
-        "benefit_DKFwHX": {
-          "type": "benefit",
-          "settings": {
-            "icon": "returns",
-            "title": "30-day returns",
-            "text": ""
-          }
-        },
-        "benefit_KnhtKn": {
-          "type": "benefit",
-          "settings": {
-            "icon": "warranty",
-            "title": "3-year warranty",
-            "text": ""
-          }
-        }
-      },
-      "block_order": [
-        "benefit_FQBq3y",
-        "benefit_DKFwHX",
-        "benefit_KnhtKn"
-      ],
-      "name": "t:sections.non_stop_benefits.name",
-      "settings": {
-        "heading": "The NONSTOP promise",
-        "color_scheme": ""
-      }
-    },
     "non_stop_pdp_story_8Y9NKt": {
       "type": "non-stop-pdp-story",
       "blocks": {
@@ -323,6 +284,45 @@
         "text": "",
         "image_position": "left",
         "color_scheme": "scheme-2"
+      }
+    },
+    "non_stop_benefits_Y3f78V": {
+      "type": "non-stop-benefits",
+      "blocks": {
+        "benefit_FQBq3y": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shipping",
+            "title": "Built to last",
+            "text": ""
+          }
+        },
+        "benefit_DKFwHX": {
+          "type": "benefit",
+          "settings": {
+            "icon": "returns",
+            "title": "30-day returns",
+            "text": ""
+          }
+        },
+        "benefit_KnhtKn": {
+          "type": "benefit",
+          "settings": {
+            "icon": "warranty",
+            "title": "3-year warranty",
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "benefit_FQBq3y",
+        "benefit_DKFwHX",
+        "benefit_KnhtKn"
+      ],
+      "name": "t:sections.non_stop_benefits.name",
+      "settings": {
+        "heading": "The NONSTOP promise",
+        "color_scheme": ""
       }
     },
     "collection_list_YnPiVh": {
@@ -597,9 +597,9 @@
     "featured_collection",
     "image_with_text_AC9VBA",
     "video",
-    "non_stop_benefits_Y3f78V",
-    "non_stop_pdp_story_8Y9NKt",
     "collection_list_YnPiVh",
+    "non_stop_pdp_story_8Y9NKt",
+    "non_stop_benefits_Y3f78V",
     "multicolumn_cz8W64",
     "collage_jTXG9J",
     "newsletter_RazjTP",
