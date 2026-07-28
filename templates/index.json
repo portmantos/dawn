@@ -425,10 +425,11 @@
         "row_XVexez": {
           "type": "row",
           "settings": {
-            "caption": "Caption",
-            "heading": "Row",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "button_label": "Button label",
+            "image": "shopify://shop_images/5e606d07789d950f18588769f0abafd747fdf7da54f003c2e5dbc23d2e660baa.jpg",
+            "caption": "",
+            "heading": "USB PORT",
+            "text": "<p>Stay charged on the go with our carry-on featuring dual USB ports. Keep your phone, tablet, and other devices powered throughout your journey without searching for outlets. Perfect for long flights, road trips, and airport layovers. Never run out of battery when you need it most.</p>",
+            "button_label": "",
             "button_link": ""
           }
         },
