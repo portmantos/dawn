@@ -46,7 +46,7 @@
     "header": {
       "type": "header",
       "settings": {
-        "header_style": "classic",
+        "header_style": "catalog",
         "header_width": "page",
         "navigation_style": "plain",
         "logo_position": "middle-left",
