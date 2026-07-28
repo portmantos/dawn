@@ -11,6 +11,7 @@
   "sections": {
     "banner": {
       "type": "main-collection-banner",
+      "disabled": true,
       "settings": {
         "show_collection_description": true,
         "show_collection_image": false,
@@ -63,7 +64,7 @@
         "heading": "Shop by collection",
         "show_all_link": true,
         "all_label": "All luggage",
-        "color_scheme": "scheme-1"
+        "color_scheme": "scheme-2"
       }
     },
     "product_grid": {

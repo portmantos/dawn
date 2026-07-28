@@ -198,12 +198,11 @@
     },
     "video": {
       "type": "video",
-      "disabled": true,
       "settings": {
         "heading": "",
         "heading_size": "h1",
         "enable_video_looping": false,
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "video_url": "https://youtu.be/rt9LOHvu-eU",
         "description": "",
         "full_width": false,
         "color_scheme": "scheme-1",
