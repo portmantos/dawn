@@ -20,10 +20,26 @@
     "collection_nav": {
       "type": "non-stop-collection-nav",
       "blocks": {
+        "collection_link_9LC4yH": {
+          "type": "collection_link",
+          "settings": {
+            "collection": "",
+            "label": "",
+            "custom_url": ""
+          }
+        },
         "collection_one": {
           "type": "collection_link",
           "settings": {
             "collection": "to-new-york",
+            "label": "",
+            "custom_url": ""
+          }
+        },
+        "collection_link_pnMLKK": {
+          "type": "collection_link",
+          "settings": {
+            "collection": "",
             "label": "",
             "custom_url": ""
           }
@@ -38,7 +54,9 @@
         }
       },
       "block_order": [
+        "collection_link_9LC4yH",
         "collection_one",
+        "collection_link_pnMLKK",
         "collection_two"
       ],
       "settings": {
@@ -51,7 +69,7 @@
     "product_grid": {
       "type": "main-collection-product-grid",
       "settings": {
-        "products_per_page": 20,
+        "products_per_page": 8,
         "columns_desktop": 4,
         "columns_mobile": "2",
         "color_scheme": "scheme-1",

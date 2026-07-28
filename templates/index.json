@@ -9,11 +9,30 @@
  */
 {
   "sections": {
+    "non_stop_hero_m9XxcE": {
+      "type": "non-stop-hero",
+      "name": "Non-Stop hero",
+      "settings": {
+        "image": "shopify://shop_images/ChatGPT_Image_Jul_16_2026_03_24_03_PM.png",
+        "mobile_image": "shopify://shop_images/ChatGPT_Image_Jul_16_2026_03_24_03_PM.png",
+        "eyebrow": "Travel, Nonstop!",
+        "heading": "Built for every mode of travel",
+        "text": "<p>Thoughtful luggage for the quick getaway, the long haul, and everything in between. We believe travel should be effortless and nonstop!</p>",
+        "image_overlay": 40,
+        "content_position": "left",
+        "button_label": "Shop luggage",
+        "button_link": "",
+        "secondary_button_label": "See the collections",
+        "secondary_button_link": "",
+        "color_scheme": ""
+      }
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
         "heading": {
           "type": "heading",
+          "disabled": true,
           "settings": {
             "heading": "Image banner",
             "heading_size": "h0"
@@ -21,6 +40,7 @@
         },
         "text": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "text": "Give customers details about the banner image(s) or content on the template.",
             "text_style": "body"
@@ -28,6 +48,7 @@
         },
         "button": {
           "type": "buttons",
+          "disabled": true,
           "settings": {
             "button_label_1": "Shop all",
             "button_link_1": "shopify://collections/all",
@@ -43,18 +64,58 @@
         "text",
         "button"
       ],
+      "disabled": true,
       "settings": {
         "image": "shopify://shop_images/0950NonStop2019s_2000.jpg",
         "image_overlay_opacity": 40,
-        "image_height": "large",
+        "image_height": "medium",
         "image_behavior": "none",
-        "desktop_content_position": "bottom-center",
+        "desktop_content_position": "top-left",
         "desktop_content_alignment": "center",
         "show_text_box": false,
         "color_scheme": "scheme-3",
         "stack_images_on_mobile": false,
         "mobile_content_alignment": "center",
         "show_text_below": false
+      }
+    },
+    "non_stop_benefits_Y3f78V": {
+      "type": "non-stop-benefits",
+      "blocks": {
+        "benefit_FQBq3y": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shipping",
+            "title": "Built to last",
+            "text": ""
+          }
+        },
+        "benefit_DKFwHX": {
+          "type": "benefit",
+          "settings": {
+            "icon": "returns",
+            "title": "30-day returns",
+            "text": ""
+          }
+        },
+        "benefit_KnhtKn": {
+          "type": "benefit",
+          "settings": {
+            "icon": "warranty",
+            "title": "3-year warranty",
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "benefit_FQBq3y",
+        "benefit_DKFwHX",
+        "benefit_KnhtKn"
+      ],
+      "name": "t:sections.non_stop_benefits.name",
+      "settings": {
+        "heading": "The NONSTOP promise",
+        "color_scheme": ""
       }
     },
     "rich_text": {
@@ -78,6 +139,7 @@
         "heading",
         "text"
       ],
+      "disabled": true,
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
@@ -85,6 +147,50 @@
         "full_width": true,
         "padding_top": 40,
         "padding_bottom": 0
+      }
+    },
+    "rich_text_xHirVc": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_g4kQJY": {
+          "type": "heading",
+          "settings": {
+            "heading": "Our Story",
+            "heading_size": "h0"
+          }
+        },
+        "text_9QCjGj": {
+          "type": "text",
+          "settings": {
+            "text": "<p>At nonstop, we understand that modern travelers need more than just luggage—they need a reliable companion for every journey. Founded on the belief that travel should inspire, not burden, we've dedicated ourselves to creating thoughtfully designed pieces that move with you, not against you.</p>"
+          }
+        },
+        "button_MrEPFR": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_g4kQJY",
+        "text_9QCjGj",
+        "button_MrEPFR"
+      ],
+      "disabled": true,
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
       }
     },
     "featured_collection": {
@@ -115,8 +221,58 @@
         "padding_bottom": 56
       }
     },
+    "image_with_text_AC9VBA": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_QAxrzx": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Designed for the Modern Traveler",
+            "heading_size": "h1"
+          }
+        },
+        "text_8neXiN": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Every nonstop piece is engineered with the traveler in mind. From lightweight materials that don't compromise on durability, to intuitive organization systems that keep your essentials within reach, we've thought through every detail so you don't have to.</p><p>Our commitment to quality means your luggage will be ready for the next adventure, and the one after that.</p>",
+            "text_style": "body"
+          }
+        },
+        "button_BLEdYN": {
+          "type": "button",
+          "settings": {
+            "button_label": "Explore our collections",
+            "button_link": "",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_QAxrzx",
+        "text_8neXiN",
+        "button_BLEdYN"
+      ],
+      "disabled": true,
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "video": {
       "type": "video",
+      "disabled": true,
       "settings": {
         "heading": "",
         "heading_size": "h1",
@@ -128,12 +284,326 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "non_stop_pdp_story_8Y9NKt": {
+      "type": "non-stop-pdp-story",
+      "blocks": {
+        "highlight_9b6kka": {
+          "type": "highlight",
+          "settings": {
+            "title": "Thoughtful Design",
+            "text": "<p>Every curve, pocket, and handle is designed with your comfort and convenience in mind. We obsess over the details so you can focus on the adventure.</p>"
+          }
+        },
+        "highlight_mtaTFU": {
+          "type": "highlight",
+          "settings": {
+            "title": "Built to Last",
+            "text": "<p>Premium materials and expert craftsmanship mean your nonstop luggage will be ready for countless journeys. Backed by our 3-year warranty.</p>"
+          }
+        },
+        "highlight_MhAdrD": {
+          "type": "highlight",
+          "settings": {
+            "title": "Travel Smarter",
+            "text": "<p>Intuitive organization, smooth-rolling wheels, and balanced handles make every trip easier. Travel the way you want to travel.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "highlight_9b6kka",
+        "highlight_mtaTFU",
+        "highlight_MhAdrD"
+      ],
+      "name": "Non-Stop product story",
+      "settings": {
+        "image": "shopify://shop_images/image_9.png",
+        "eyebrow": "Why nonstop works",
+        "heading": "Engineered for the journey.",
+        "text": "",
+        "image_position": "left",
+        "color_scheme": "scheme-2"
+      }
+    },
+    "collection_list_YnPiVh": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_rwVPaY": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "to-new-york"
+          }
+        },
+        "featured_collection_8hFyej": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "nonstop-travel-accessories"
+          }
+        },
+        "featured_collection_Tqi4Lg": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "new-york-elite"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_rwVPaY",
+        "featured_collection_8hFyej",
+        "featured_collection_Tqi4Lg"
+      ],
+      "name": "t:sections.collection-list.presets.name",
+      "settings": {
+        "title": "Collections",
+        "heading_size": "h1",
+        "image_ratio": "square",
+        "columns_desktop": 3,
+        "color_scheme": "",
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "multicolumn_cz8W64": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_87iJLT": {
+          "type": "column",
+          "settings": {
+            "title": "Quality",
+            "text": "<p>We never compromise on materials or craftsmanship. Every piece is built to withstand the rigors of travel and the test of time.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_qXRALL": {
+          "type": "column",
+          "settings": {
+            "title": "Innovation",
+            "text": "<p>We continuously evolve our designs to meet the changing needs of modern travelers, blending functionality with thoughtful aesthetics.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_qyqe7J": {
+          "type": "column",
+          "settings": {
+            "title": "Reliability",
+            "text": "<p>When you travel with nonstop, you travel with confidence. Our products are backed by our commitment to your satisfaction.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_87iJLT",
+        "column_qXRALL",
+        "column_qyqe7J"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "Our Core Values",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "Button label",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "collage_jTXG9J": {
+      "type": "collage",
+      "blocks": {
+        "image_Yz8BkH": {
+          "type": "image",
+          "settings": {}
+        },
+        "product_XtepeG": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "second_image": false
+          }
+        },
+        "collection_LdYyQK": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_Yz8BkH",
+        "product_XtepeG",
+        "collection_LdYyQK"
+      ],
+      "disabled": true,
+      "name": "t:sections.collage.presets.name",
+      "settings": {
+        "heading": "Multimedia collage",
+        "heading_size": "h1",
+        "desktop_layout": "left",
+        "mobile_layout": "column",
+        "card_styles": "product-card-wrapper",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "newsletter_RazjTP": {
+      "type": "newsletter",
+      "blocks": {
+        "heading_iMRNQU": {
+          "type": "heading",
+          "settings": {
+            "heading": "Subscribe to our emails",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph_jwFJUR": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Be the first to know about new collections and exclusive offers.</p>"
+          }
+        },
+        "email_form_jBc9DB": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "heading_iMRNQU",
+        "paragraph_jwFJUR",
+        "email_form_jBc9DB"
+      ],
+      "name": "t:sections.newsletter.presets.name",
+      "settings": {
+        "color_scheme": "scheme-4",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "multirow_wVbyCk": {
+      "type": "multirow",
+      "blocks": {
+        "row_XVexez": {
+          "type": "row",
+          "settings": {
+            "caption": "Caption",
+            "heading": "Row",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "button_label": "Button label",
+            "button_link": ""
+          }
+        },
+        "row_pc3jiY": {
+          "type": "row",
+          "settings": {
+            "caption": "Caption",
+            "heading": "Row",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "button_label": "Button label",
+            "button_link": ""
+          }
+        },
+        "row_xrj6CP": {
+          "type": "row",
+          "settings": {
+            "caption": "Caption",
+            "heading": "Row",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "button_label": "Button label",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_XVexez",
+        "row_pc3jiY",
+        "row_xrj6CP"
+      ],
+      "name": "t:sections.multirow.presets.name",
+      "settings": {
+        "image_height": "medium",
+        "desktop_image_width": "medium",
+        "image_layout": "alternate-left",
+        "heading_size": "h1",
+        "text_style": "body",
+        "button_style": "secondary",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "",
+        "row_color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "non_stop_benefits_zgGq9c": {
+      "type": "non-stop-benefits",
+      "blocks": {
+        "benefit_JCN4M8": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shipping",
+            "title": "Built to last",
+            "text": "<p>Dependable materials and thoughtful details for miles of use.</p>"
+          }
+        },
+        "benefit_QkiKMM": {
+          "type": "benefit",
+          "settings": {
+            "icon": "returns",
+            "title": "30-day returns",
+            "text": "<p>Take the time to make sure the piece is right for you.</p>"
+          }
+        },
+        "benefit_4KGpiC": {
+          "type": "benefit",
+          "settings": {
+            "icon": "warranty",
+            "title": "3-year warranty",
+            "text": "<p>Travel with coverage against manufacturing defects.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_JCN4M8",
+        "benefit_QkiKMM",
+        "benefit_4KGpiC"
+      ],
+      "name": "t:sections.non_stop_benefits.name",
+      "settings": {
+        "heading": "The non-stop promise",
+        "color_scheme": ""
+      }
     }
   },
   "order": [
+    "non_stop_hero_m9XxcE",
     "image_banner",
     "rich_text",
+    "rich_text_xHirVc",
     "featured_collection",
-    "video"
+    "image_with_text_AC9VBA",
+    "video",
+    "non_stop_benefits_Y3f78V",
+    "non_stop_pdp_story_8Y9NKt",
+    "collection_list_YnPiVh",
+    "multicolumn_cz8W64",
+    "collage_jTXG9J",
+    "newsletter_RazjTP",
+    "multirow_wVbyCk",
+    "non_stop_benefits_zgGq9c"
   ]
 }
