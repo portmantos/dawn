@@ -246,6 +246,47 @@
         "padding_bottom": 36
       }
     },
+    "collection_list_YnPiVh": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_rwVPaY": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "to-new-york"
+          }
+        },
+        "featured_collection_8hFyej": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "nonstop-travel-accessories"
+          }
+        },
+        "featured_collection_Tqi4Lg": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "new-york-elite"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_rwVPaY",
+        "featured_collection_8hFyej",
+        "featured_collection_Tqi4Lg"
+      ],
+      "name": "t:sections.collection-list.presets.name",
+      "settings": {
+        "title": "Collections",
+        "heading_size": "h1",
+        "image_ratio": "square",
+        "columns_desktop": 3,
+        "color_scheme": "",
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "non_stop_pdp_story_8Y9NKt": {
       "type": "non-stop-pdp-story",
       "blocks": {
@@ -279,7 +320,7 @@
       "name": "Non-Stop product story",
       "settings": {
         "image": "shopify://shop_images/image_9.png",
-        "eyebrow": "Why nonstop works",
+        "eyebrow": "Why nonstop?",
         "heading": "Engineered for the journey.",
         "text": "",
         "image_position": "left",
@@ -323,47 +364,6 @@
       "settings": {
         "heading": "The NONSTOP promise",
         "color_scheme": ""
-      }
-    },
-    "collection_list_YnPiVh": {
-      "type": "collection-list",
-      "blocks": {
-        "featured_collection_rwVPaY": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "to-new-york"
-          }
-        },
-        "featured_collection_8hFyej": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "nonstop-travel-accessories"
-          }
-        },
-        "featured_collection_Tqi4Lg": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "new-york-elite"
-          }
-        }
-      },
-      "block_order": [
-        "featured_collection_rwVPaY",
-        "featured_collection_8hFyej",
-        "featured_collection_Tqi4Lg"
-      ],
-      "name": "t:sections.collection-list.presets.name",
-      "settings": {
-        "title": "Collections",
-        "heading_size": "h1",
-        "image_ratio": "square",
-        "columns_desktop": 3,
-        "color_scheme": "",
-        "show_view_all": false,
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
       }
     },
     "multicolumn_cz8W64": {
