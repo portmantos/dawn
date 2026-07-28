@@ -436,9 +436,10 @@
         "row_pc3jiY": {
           "type": "row",
           "settings": {
-            "caption": "Caption",
-            "heading": "Row",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "image": "shopify://shop_images/d5cae10a8a88e5eee6a30cbdc702fa64ce3c4d8900de7946fcc432186e34e6c8_691342de-c374-461f-91ff-989928bd418e.jpg",
+            "caption": "",
+            "heading": "Expandable",
+            "text": "<p>All sizes feature a 2\" expandable zipper for easy access and versatile packing. Whether you're traveling light or maximizing capacity, this thoughtful design detail makes organizing your essentials effortless.</p>",
             "button_label": "Button label",
             "button_link": ""
           }
@@ -446,10 +447,11 @@
         "row_xrj6CP": {
           "type": "row",
           "settings": {
-            "caption": "Caption",
-            "heading": "Row",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "button_label": "Button label",
+            "image": "shopify://shop_images/f4afe3e23b35404bdaaed6460453e1495c8787ea94293ab9b612d9ca4a6a4452.jpg",
+            "caption": "",
+            "heading": "Charge on the Go!",
+            "text": "<p>Keep your essentials charged and organized with our interior powerbank pocket. Designed for convenience, this dedicated compartment securely holds your powerbank while you travel, ensuring your devices stay powered throughout your journey. Perfect for staying connected on the go.</p>",
+            "button_label": "",
             "button_link": ""
           }
         }
