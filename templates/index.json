@@ -22,7 +22,7 @@
         "content_position": "left",
         "button_label": "Shop luggage",
         "button_link": "",
-        "secondary_button_label": "See the collections",
+        "secondary_button_label": "",
         "secondary_button_link": "",
         "color_scheme": ""
       }
@@ -77,45 +77,6 @@
         "stack_images_on_mobile": false,
         "mobile_content_alignment": "center",
         "show_text_below": false
-      }
-    },
-    "non_stop_benefits_Y3f78V": {
-      "type": "non-stop-benefits",
-      "blocks": {
-        "benefit_FQBq3y": {
-          "type": "benefit",
-          "settings": {
-            "icon": "shipping",
-            "title": "Built to last",
-            "text": ""
-          }
-        },
-        "benefit_DKFwHX": {
-          "type": "benefit",
-          "settings": {
-            "icon": "returns",
-            "title": "30-day returns",
-            "text": ""
-          }
-        },
-        "benefit_KnhtKn": {
-          "type": "benefit",
-          "settings": {
-            "icon": "warranty",
-            "title": "3-year warranty",
-            "text": ""
-          }
-        }
-      },
-      "block_order": [
-        "benefit_FQBq3y",
-        "benefit_DKFwHX",
-        "benefit_KnhtKn"
-      ],
-      "name": "t:sections.non_stop_benefits.name",
-      "settings": {
-        "heading": "The NONSTOP promise",
-        "color_scheme": ""
       }
     },
     "rich_text": {
@@ -283,6 +244,45 @@
         "color_scheme": "scheme-1",
         "padding_top": 36,
         "padding_bottom": 36
+      }
+    },
+    "non_stop_benefits_Y3f78V": {
+      "type": "non-stop-benefits",
+      "blocks": {
+        "benefit_FQBq3y": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shipping",
+            "title": "Built to last",
+            "text": ""
+          }
+        },
+        "benefit_DKFwHX": {
+          "type": "benefit",
+          "settings": {
+            "icon": "returns",
+            "title": "30-day returns",
+            "text": ""
+          }
+        },
+        "benefit_KnhtKn": {
+          "type": "benefit",
+          "settings": {
+            "icon": "warranty",
+            "title": "3-year warranty",
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "benefit_FQBq3y",
+        "benefit_DKFwHX",
+        "benefit_KnhtKn"
+      ],
+      "name": "t:sections.non_stop_benefits.name",
+      "settings": {
+        "heading": "The NONSTOP promise",
+        "color_scheme": ""
       }
     },
     "non_stop_pdp_story_8Y9NKt": {
