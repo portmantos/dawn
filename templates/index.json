@@ -285,6 +285,7 @@
         "benefit_DKFwHX",
         "benefit_KnhtKn"
       ],
+      "disabled": true,
       "name": "t:sections.non_stop_benefits.name",
       "settings": {
         "heading": "The NONSTOP promise",
@@ -411,6 +412,7 @@
         "paragraph_jwFJUR",
         "email_form_jBc9DB"
       ],
+      "disabled": true,
       "name": "t:sections.newsletter.presets.name",
       "settings": {
         "color_scheme": "scheme-4",
@@ -425,7 +427,7 @@
         "row_XVexez": {
           "type": "row",
           "settings": {
-            "image": "shopify://shop_images/5e606d07789d950f18588769f0abafd747fdf7da54f003c2e5dbc23d2e660baa.jpg",
+            "image": "shopify://shop_images/6aa6c999717a233c6fc7c96a5caac561da5282dd747240348dfc85b5e5f51bb4.jpg",
             "caption": "",
             "heading": "USB PORT",
             "text": "<p>Stay charged on the go with our carry-on featuring dual USB ports. Keep your phone, tablet, and other devices powered throughout your journey without searching for outlets. Perfect for long flights, road trips, and airport layovers. Never run out of battery when you need it most.</p>",
