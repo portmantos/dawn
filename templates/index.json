@@ -137,6 +137,7 @@
         "highlight_mtaTFU",
         "highlight_MhAdrD"
       ],
+      "disabled": true,
       "name": "Non-Stop product story",
       "settings": {
         "image": "shopify://shop_images/image_9.png",
@@ -161,7 +162,7 @@
         "text_8neXiN": {
           "type": "text",
           "settings": {
-            "text": "<p>Every nonstop piece is engineered with the traveler in mind. From lightweight materials that don't compromise on durability, to intuitive organization systems that keep your essentials within reach, we've thought through every detail so you don't have to.</p><p>Our commitment to quality means your luggage will be ready for the next adventure, and the one after that.</p>",
+            "text": "<p><strong>The #1 Registered Luggage Set on The Knot</strong></p><p>Meet the luggage set couples love most. The Nonstop Luggage Set has been the #1 registered luggage set on The Knot and a winner for three consecutive years (2024–2026). Designed for every adventure ahead, it's the perfect gift for newlyweds, newly engaged couples, or anyone ready to travel in style. Whether you're treating yourself or celebrating your best friends' next chapter, this is the luggage set you won't want to miss.</p>",
             "text_style": "body"
           }
         },
@@ -179,9 +180,9 @@
         "text_8neXiN",
         "button_BLEdYN"
       ],
-      "disabled": true,
       "name": "t:sections.image-with-text.presets.name",
       "settings": {
+        "image": "shopify://shop_images/1_2.png",
         "height": "adapt",
         "desktop_image_width": "medium",
         "layout": "image_first",
