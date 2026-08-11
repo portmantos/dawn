@@ -1,6 +1,136 @@
+{% doc %}
+  @prompt
+    Hide the sale badge/bubble that appears on the product page price block, while keeping the price display fully visible. The sale badge should be hidden without affecting any other elements.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-hide-sale-badge-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+  }
+
+  .ai-hide-sale-badge-{{ ai_gen_id }} .badge.price__badge-sale {
+    display: none !important;
+  }
+
+  .ai-hide-sale-badge-{{ ai_gen_id }} .price__badge-sale {
+    display: none !important;
+  }
+
+  .ai-hide-sale-badge-{{ ai_gen_id }} .price .badge--sale {
+    display: none !important;
+  }
+
+  .ai-hide-sale-badge-{{ ai_gen_id }} [class*="sale"] .badge {
+    display: none !important;
+  }
+{% endstyle %}
+
+<hide-sale-badge-{{ ai_gen_id }}
+  class="ai-hide-sale-badge-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-hide-sale-badge-message-{{ ai_gen_id }}">
+    {% if block.settings.show_message %}
+      <p style="
+        text-align: center;
+        color: {{ block.settings.message_color }};
+        font-size: {{ block.settings.message_size }}px;
+        padding: 10px;
+        margin: 0;
+      ">
+        {{ block.settings.message_text }}
+      </p>
+    {% endif %}
+  </div>
+</hide-sale-badge-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class HideSaleBadge{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.hideBadges();
+        this.observeDOM();
+      }
+
+      hideBadges() {
+        const badges = document.querySelectorAll('.badge.price__badge-sale, .price__badge-sale, .price .badge--sale');
+        badges.forEach(badge => {
+          badge.style.display = 'none';
+        });
+      }
+
+      observeDOM() {
+        const observer = new MutationObserver(() => {
+          this.hideBadges();
+        });
+
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+      }
+    }
+
+    customElements.define('hide-sale-badge-{{ ai_gen_id }}', HideSaleBadge{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Hide sale badge",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Badge visibility"
+    },
+    {
+      "type": "paragraph",
+      "content": "This block hides the sale badge on product pages while keeping all price information visible."
+    },
+    {
+      "type": "header",
+      "content": "Optional message"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_message",
+      "label": "Show confirmation message",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "message_text",
+      "label": "Message text",
+      "default": "Sale badge hidden"
+    },
+    {
+      "type": "color",
+      "id": "message_color",
+      "label": "Message color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "message_size",
+      "label": "Message size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hide sale badge"
+    }
+  ]
+}
 {% endschema %}
