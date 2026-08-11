@@ -533,6 +533,25 @@
         "ai_gen_block_4d7e606_EWQFdx"
       ],
       "settings": {}
+    },
+    "17864767166572784a": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_7f62fc5_7LbnB3": {
+          "type": "ai_gen_block_7f62fc5",
+          "settings": {
+            "show_message": false,
+            "message_text": "Sale badge hidden",
+            "message_color": "#121212",
+            "message_size": 14
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_7f62fc5_7LbnB3"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -549,6 +568,7 @@
     "newsletter_RazjTP",
     "multirow_wVbyCk",
     "non_stop_benefits_zgGq9c",
-    "1786476657b139ef78"
+    "1786476657b139ef78",
+    "17864767166572784a"
   ]
 }
