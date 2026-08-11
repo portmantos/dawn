@@ -519,6 +519,20 @@
         "heading": "A Brand You Can Trust",
         "color_scheme": ""
       }
+    },
+    "1786476657b139ef78": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_4d7e606_EWQFdx": {
+          "type": "ai_gen_block_4d7e606",
+          "settings": {},
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_4d7e606_EWQFdx"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -534,6 +548,7 @@
     "collage_jTXG9J",
     "newsletter_RazjTP",
     "multirow_wVbyCk",
-    "non_stop_benefits_zgGq9c"
+    "non_stop_benefits_zgGq9c",
+    "1786476657b139ef78"
   ]
 }

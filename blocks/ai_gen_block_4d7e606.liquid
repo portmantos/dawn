@@ -1,0 +1,81 @@
+{% doc %}
+  @prompt
+    Hide the sale badge/bubble that appears on the product page price block, while keeping the price display fully visible. The sale badge should be hidden without affecting any other elements.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-hide-sale-badge-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+  }
+
+  .ai-hide-sale-badge-{{ ai_gen_id }} .badge.price__badge-sale {
+    display: none !important;
+  }
+
+  .ai-hide-sale-badge-{{ ai_gen_id }} .price__badge-sale {
+    display: none !important;
+  }
+
+  .ai-hide-sale-badge-{{ ai_gen_id }} .price .badge--bottom-left.color-scheme-5 {
+    display: none !important;
+  }
+
+  .ai-hide-sale-badge-{{ ai_gen_id }} .price .badge {
+    display: none !important;
+  }
+{% endstyle %}
+
+<style-injector-{{ ai_gen_id }} class="ai-hide-sale-badge-{{ ai_gen_id }}" {{ block.shopify_attributes }}></style-injector-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class StyleInjector{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.injectStyles();
+      }
+
+      injectStyles() {
+        const style = document.createElement('style');
+        style.textContent = `
+          .price .badge.price__badge-sale,
+          .price__badge-sale,
+          .price .badge--bottom-left,
+          .price .badge {
+            display: none !important;
+          }
+        `;
+        
+        if (!document.querySelector('#ai-hide-sale-badge-global-{{ ai_gen_id }}')) {
+          style.id = 'ai-hide-sale-badge-global-{{ ai_gen_id }}';
+          document.head.appendChild(style);
+        }
+      }
+    }
+
+    customElements.define('style-injector-{{ ai_gen_id }}', StyleInjector{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Hide sale badge",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "This block hides the sale badge on product pages while keeping all price information visible."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hide sale badge"
+    }
+  ]
+}
+{% endschema %}
