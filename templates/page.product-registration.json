@@ -17,17 +17,6 @@
         "padding_bottom": 28
       }
     },
-    "contact_form_RmwjhH": {
-      "type": "contact-form",
-      "name": "t:sections.contact-form.presets.name",
-      "settings": {
-        "heading": "Contact form",
-        "heading_size": "h1",
-        "color_scheme": "",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "178906185310dd9ec1": {
       "type": "_blocks",
       "blocks": {
@@ -69,7 +58,6 @@
   },
   "order": [
     "main",
-    "contact_form_RmwjhH",
     "178906185310dd9ec1"
   ]
 }
