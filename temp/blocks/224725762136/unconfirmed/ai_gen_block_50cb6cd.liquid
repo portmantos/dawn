@@ -1,6 +1,422 @@
+{% doc %}
+  @prompt
+    i want to make a sign up form with different fields 
+    
+    first name last name 
+    Email 
+    Drop down: Where did you purchase your nonstop luggage? options should be Itravelnonstop.com , The knot, Target, LuggageOnline.com, Portmantos.com, Meijer.com, Bestbuy.com, Nordstrom.com, Lowes.com
+    Collection
+    Nonstop New York
+    Nonstop New York Elite 
+    Add me to mailling list 
+    i agree to terms and conditions 
+    
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-registration-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 32px;
+    background: {{ block.settings.background_color }};
+    color: {{ block.settings.text_color }};
+    border: 1px solid {{ block.settings.border_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .ai-registration-{{ ai_gen_id }}__inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .ai-registration-{{ ai_gen_id }}__heading {
+    margin: 0 0 8px;
+    color: {{ block.settings.text_color }};
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  .ai-registration-{{ ai_gen_id }}__intro {
+    margin: 0 0 24px;
+    color: {{ block.settings.muted_text_color }};
+    line-height: 1.5;
+  }
+
+  .ai-registration-{{ ai_gen_id }}__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 16px;
+  }
+
+  .ai-registration-{{ ai_gen_id }}__field--full,
+  .ai-registration-{{ ai_gen_id }}__options {
+    grid-column: 1 / -1;
+  }
+
+  .ai-registration-{{ ai_gen_id }}__label {
+    display: block;
+    margin-bottom: 7px;
+    color: {{ block.settings.text_color }};
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .ai-registration-{{ ai_gen_id }}__required {
+    color: {{ block.settings.required_color }};
+  }
+
+  .ai-registration-{{ ai_gen_id }}__input,
+  .ai-registration-{{ ai_gen_id }}__select {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    color: {{ block.settings.text_color }};
+    background: {{ block.settings.input_background_color }};
+    border: 1px solid {{ block.settings.input_border_color }};
+    border-radius: {{ block.settings.input_border_radius }}px;
+    font: inherit;
+  }
+
+  .ai-registration-{{ ai_gen_id }}__input:focus,
+  .ai-registration-{{ ai_gen_id }}__select:focus {
+    outline: 2px solid {{ block.settings.focus_color }};
+    outline-offset: 2px;
+  }
+
+  .ai-registration-{{ ai_gen_id }}__options {
+    display: grid;
+    gap: 14px;
+    margin-top: 4px;
+  }
+
+  .ai-registration-{{ ai_gen_id }}__check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.45;
+  }
+
+  .ai-registration-{{ ai_gen_id }}__check input {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
+    margin-top: 2px;
+    accent-color: {{ block.settings.button_color }};
+  }
+
+  .ai-registration-{{ ai_gen_id }}__check a {
+    color: {{ block.settings.link_color }};
+    text-decoration: underline;
+  }
+
+  .ai-registration-{{ ai_gen_id }}__submit {
+    width: 100%;
+    min-height: 50px;
+    margin-top: 24px;
+    padding: 13px 22px;
+    color: {{ block.settings.button_text_color }};
+    background: {{ block.settings.button_color }};
+    border: 1px solid {{ block.settings.button_color }};
+    border-radius: {{ block.settings.button_border_radius }}px;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+  }
+
+  .ai-registration-{{ ai_gen_id }}__submit:hover {
+    opacity: 0.88;
+  }
+
+  .ai-registration-{{ ai_gen_id }}__message {
+    margin: 0 0 20px;
+    padding: 12px 14px;
+    border-radius: {{ block.settings.input_border_radius }}px;
+    line-height: 1.4;
+  }
+
+  .ai-registration-{{ ai_gen_id }}__message--success {
+    color: #14532d;
+    background: #dcfce7;
+  }
+
+  .ai-registration-{{ ai_gen_id }}__message--error {
+    color: #991b1b;
+    background: #fee2e2;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-registration-{{ ai_gen_id }} {
+      padding: 24px 18px;
+    }
+
+    .ai-registration-{{ ai_gen_id }}__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .ai-registration-{{ ai_gen_id }}__field--full,
+    .ai-registration-{{ ai_gen_id }}__options {
+      grid-column: auto;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-registration-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-registration-{{ ai_gen_id }}__inner">
+    {% form 'contact' %}
+      {% if form.posted_successfully? %}
+        <div class="ai-registration-{{ ai_gen_id }}__message ai-registration-{{ ai_gen_id }}__message--success" role="status">
+          {{ block.settings.success_message }}
+        </div>
+      {% endif %}
+
+      {% if form.errors %}
+        <div class="ai-registration-{{ ai_gen_id }}__message ai-registration-{{ ai_gen_id }}__message--error" role="alert">
+          Please review the required fields and try again.
+        </div>
+      {% endif %}
+
+      <h2 class="ai-registration-{{ ai_gen_id }}__heading">{{ block.settings.heading }}</h2>
+      <p class="ai-registration-{{ ai_gen_id }}__intro">{{ block.settings.intro }}</p>
+
+      <div class="ai-registration-{{ ai_gen_id }}__grid">
+        <div>
+          <label class="ai-registration-{{ ai_gen_id }}__label" for="first-name-{{ ai_gen_id }}">First name <span class="ai-registration-{{ ai_gen_id }}__required">*</span></label>
+          <input class="ai-registration-{{ ai_gen_id }}__input" id="first-name-{{ ai_gen_id }}" type="text" name="contact[first_name]" autocomplete="given-name" required>
+        </div>
+
+        <div>
+          <label class="ai-registration-{{ ai_gen_id }}__label" for="last-name-{{ ai_gen_id }}">Last name <span class="ai-registration-{{ ai_gen_id }}__required">*</span></label>
+          <input class="ai-registration-{{ ai_gen_id }}__input" id="last-name-{{ ai_gen_id }}" type="text" name="contact[last_name]" autocomplete="family-name" required>
+        </div>
+
+        <div class="ai-registration-{{ ai_gen_id }}__field--full">
+          <label class="ai-registration-{{ ai_gen_id }}__label" for="email-{{ ai_gen_id }}">Email <span class="ai-registration-{{ ai_gen_id }}__required">*</span></label>
+          <input class="ai-registration-{{ ai_gen_id }}__input" id="email-{{ ai_gen_id }}" type="email" name="contact[email]" autocomplete="email" required>
+        </div>
+
+        <div class="ai-registration-{{ ai_gen_id }}__field--full">
+          <label class="ai-registration-{{ ai_gen_id }}__label" for="purchase-location-{{ ai_gen_id }}">Where did you purchase your Nonstop luggage? <span class="ai-registration-{{ ai_gen_id }}__required">*</span></label>
+          <select class="ai-registration-{{ ai_gen_id }}__select" id="purchase-location-{{ ai_gen_id }}" name="contact[purchase_location]" required>
+            <option value="" selected disabled>Please select</option>
+            <option value="Itravelnonstop.com">Itravelnonstop.com</option>
+            <option value="The knot">The knot</option>
+            <option value="Target">Target</option>
+            <option value="LuggageOnline.com">LuggageOnline.com</option>
+            <option value="Portmantos.com">Portmantos.com</option>
+            <option value="Meijer.com">Meijer.com</option>
+            <option value="Bestbuy.com">Bestbuy.com</option>
+            <option value="Nordstrom.com">Nordstrom.com</option>
+            <option value="Lowes.com">Lowes.com</option>
+          </select>
+        </div>
+
+        <div class="ai-registration-{{ ai_gen_id }}__field--full">
+          <label class="ai-registration-{{ ai_gen_id }}__label" for="collection-{{ ai_gen_id }}">Collection <span class="ai-registration-{{ ai_gen_id }}__required">*</span></label>
+          <select class="ai-registration-{{ ai_gen_id }}__select" id="collection-{{ ai_gen_id }}" name="contact[collection]" required>
+            <option value="" selected disabled>Please select</option>
+            <option value="Nonstop New York">Nonstop New York</option>
+            <option value="Nonstop New York Elite">Nonstop New York Elite</option>
+          </select>
+        </div>
+
+        <div class="ai-registration-{{ ai_gen_id }}__options">
+          <label class="ai-registration-{{ ai_gen_id }}__check">
+            <input type="checkbox" name="contact[accepts_marketing]" value="yes">
+            <span>{{ block.settings.mailing_label }}</span>
+          </label>
+
+          <label class="ai-registration-{{ ai_gen_id }}__check">
+            <input type="checkbox" name="contact[terms_agreement]" value="yes" required>
+            <span>{{ block.settings.terms_label }} <a href="{{ block.settings.terms_link }}">{{ block.settings.terms_link_text }}</a> <span class="ai-registration-{{ ai_gen_id }}__required">*</span></span>
+          </label>
+        </div>
+      </div>
+
+      <button class="ai-registration-{{ ai_gen_id }}__submit" type="submit">{{ block.settings.button_label }}</button>
+    {% endform %}
+  </div>
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Product registration form",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Register your Nonstop luggage"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro text",
+      "default": "Complete the form below to register your luggage."
+    },
+    {
+      "type": "text",
+      "id": "mailing_label",
+      "label": "Mailing list label",
+      "default": "Add me to the mailing list"
+    },
+    {
+      "type": "text",
+      "id": "terms_label",
+      "label": "Terms label",
+      "default": "I agree to the"
+    },
+    {
+      "type": "text",
+      "id": "terms_link_text",
+      "label": "Terms link text",
+      "default": "terms and conditions"
+    },
+    {
+      "type": "url",
+      "id": "terms_link",
+      "label": "Terms link"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Register luggage"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thank you. Your luggage registration has been submitted."
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "muted_text_color",
+      "label": "Muted text",
+      "default": "#4A4A4A"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border",
+      "default": "#D3D3D3"
+    },
+    {
+      "type": "color",
+      "id": "input_background_color",
+      "label": "Input background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "input_border_color",
+      "label": "Input border",
+      "default": "#777777"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Links",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "focus_color",
+      "label": "Focus outline",
+      "default": "#334FB4"
+    },
+    {
+      "type": "color",
+      "id": "required_color",
+      "label": "Required marker",
+      "default": "#991B1B"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Form radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "input_border_radius",
+      "label": "Input radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product registration form"
+    }
+  ],
+  "tag": null,
+  "class": "product-registration-block"
+}
 {% endschema %}
