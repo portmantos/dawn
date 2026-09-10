@@ -23,12 +23,12 @@
         "ai_gen_block_50cb6cd_Hy77jp": {
           "type": "ai_gen_block_50cb6cd",
           "settings": {
-            "heading": "Register your Nonstop luggage",
+            "heading": "Register your Nonstop Luggage",
             "intro": "Complete the form below to register your luggage for our Warranty.",
             "mailing_label": "Add me to the mailing list",
             "terms_label": "I agree to the",
             "terms_link_text": "terms and conditions",
-            "terms_link": "",
+            "terms_link": "shopify://policies/terms-of-service",
             "button_label": "Register luggage",
             "success_message": "Thank you. Your luggage registration has been submitted.",
             "desktop_width_percent": 100,
